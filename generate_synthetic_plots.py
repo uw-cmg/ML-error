@@ -5,8 +5,8 @@ from package import MakePlot as mp
 from package import TestData as td
 
 # Path to save files
-#path = 'Supplemental_Info/Friedman_500/5-Fold/RF'
-path = 'plots/nll_friedman_500'
+path = 'Supplemental_Info/Friedman_500/5-Fold/RF'
+#path = 'plots/'
 
 # Load data
 X_train = np.load('friedman_500_data/training_x_values.npy')

@@ -13,10 +13,11 @@ x3_train=np.random.rand(training_num)*0.5
 x4_train=np.random.rand(training_num)*0.5
 
 # Put x-values together in a single array
-X_train = [[x0_train[i], x1_train[i], x2_train[i], x3_train[i], x4_train[i]] for i in range(0,training_num)]
+X_train = [[x0_train[i], x1_train[i], x2_train[i], x3_train[i], x4_train[i]] for i in range(0, training_num)]
 
 # Define y-values with synthetic function
 y_train = 30*np.sin(4*np.pi*x0_train*x1_train) + 20*(x2_train - 0.5)**2 + 10*x3_train + 5*x4_train
+
 
 # Define standard deviation of training data
 standard_deviation = np.std(y_train)
@@ -55,6 +56,7 @@ X_test = [[x0_test[i], x1_test[i], x2_test[i], x3_test[i], x4_test[i]] for i in 
 
 # y-value with friedman function
 y_test = 30*np.sin(4*np.pi*x0_test*x1_test) + 20*(x2_test - 0.5)**2 + 10*x3_test + 5*x4_test
+
 
 # add noise
 y_noise_test = np.random.normal(mu, sigma, len(y_test))
