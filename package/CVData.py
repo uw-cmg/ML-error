@@ -1,4 +1,5 @@
 from package import rf
+from package import LinReg as lr
 import statistics
 import numpy as np
 from sklearn.model_selection import ShuffleSplit
@@ -14,6 +15,8 @@ class CVData:
 	def get_residuals_and_model_errors(self, model_type, X_train, y_train, model_num=200, random_state=91936274):
 		if model_type == "RF":
 			return self._get_RF(X_train, y_train, model_num, random_state)
+		elif model_type == "LR":
+			return self._get_LR(X_train, y_train, model_num, random_state)
 		else:
 			print("No valid model type was provided in the 'get_residuals_and_model_errors' CVData method.")
 
@@ -33,3 +36,20 @@ class CVData:
 			RF_resid = np.concatenate((RF_resid, rf_res), axis=None)
 
 		return RF_resid, RF_model_errors
+
+	def _get_LR(self, X_values, y_values, model_num, random_state):
+		rkf = RepeatedKFold(n_splits=5, n_repeats=4, random_state=random_state)
+		# LR
+		LR_model_errors = np.asarray([])
+		LR_resid = np.asarray([])
+		for train_index, test_index in rkf.split(X_values):
+			X_train, X_test = X_values[train_index], X_values[test_index]
+			y_train, y_test = y_values[train_index], y_values[test_index]
+			LR = lr.LinReg()
+			LR.train(X_train, y_train, model_num)
+			lr_pred, LR_errors = LR.predict(X_test, True)
+			lr_res = y_test - lr_pred
+			LR_model_errors = np.concatenate((LR_model_errors, LR_errors), axis=None)
+			LR_resid = np.concatenate((LR_resid, lr_res), axis=None)
+
+		return LR_resid, LR_model_errors

@@ -33,7 +33,7 @@ class ConvergenceData:
 			print("No valid model_type provided for the 'direct' method in ConvergenceData.")
 
 
-########################### private helper functions ##########################
+########################### helper functions ##########################
 
 	def _direct_RF(self, num_models, model_type, X_train, y_train, num_averaged):
 		stdev = np.std(y_train)
