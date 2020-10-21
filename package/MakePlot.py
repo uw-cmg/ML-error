@@ -17,6 +17,15 @@ class MakePlot:
         # Define input data -- divide by standard deviation
         abs_res = abs(residuals)
 
+        # check to see if number of bins should increase, and increase it if so
+        model_errors_sorted = np.sort(model_errors)
+        ninety_percentile = int(len(model_errors_sorted) * 0.9)
+        ninety_percentile_range = model_errors_sorted[ninety_percentile] - np.amin(model_errors)
+        total_range = np.amax(model_errors) - np.amin(model_errors)
+        number_of_bins = number_of_bins
+        if ninety_percentile_range / total_range < 5 / number_of_bins:
+            number_of_bins = int(5 * total_range / ninety_percentile_range)
+
         # Set bins for calculating RMS
         upperbound = np.amax(model_errors)
         lowerbound = np.amin(model_errors)
@@ -85,6 +94,15 @@ class MakePlot:
         return model_errors, abs_res, r_squared, slope, intercept, binned_model_errors, RMS_abs_res, xfit, yfit
 
     def make_rve_bin_counts(self, model_errors, title, save=False, file_name=None, number_of_bins=15):
+        # check to see if number of bins should increase, and increase it if so
+        model_errors_sorted = np.sort(model_errors)
+        ninety_percentile = int(len(model_errors_sorted) * 0.9)
+        ninety_percentile_range = model_errors_sorted[ninety_percentile] - np.amin(model_errors)
+        total_range = np.amax(model_errors) - np.amin(model_errors)
+        number_of_bins = number_of_bins
+        if ninety_percentile_range / total_range < 5 / number_of_bins:
+            number_of_bins = int(5 * total_range / ninety_percentile_range)
+
         # Create bin counts plot
         fig = plt.figure()
         ax = fig.add_subplot(111)

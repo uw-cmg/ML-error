@@ -2,7 +2,7 @@ import statistics
 
 import numpy as np
 from sklearn.ensemble import BaggingRegressor
-from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import Ridge
 from sklearn.preprocessing import StandardScaler
 
 
@@ -20,7 +20,7 @@ class LinReg:
         self.sc = StandardScaler()
         self.X_train = self.sc.fit_transform(X_train)
         self.y_train = y_train
-        base_model = LinearRegression(fit_intercept=True)
+        base_model = Ridge(fit_intercept=True)
         self.lr = BaggingRegressor(base_estimator=base_model, n_estimators=model_num).fit(self.X_train,
                                                                                                 self.y_train)
 
