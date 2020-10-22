@@ -52,6 +52,8 @@ for dataset in datasets:
                     file_name=path + '/CV_Plots/unscaled_RvE.png')
         MP.make_rve_bin_counts(CV_model_errors, "{}, {}, Unscaled".format(model, dataset), save=True,
                     file_name=path + '/CV_Plots/unscaled_RvE_bin_counts.png')
+        MP.make_rve_with_bin_counts(CV_residuals, CV_model_errors, "{}, {}, Unscaled".format(model, dataset), save=True,
+                    file_name=path + '/CV_Plots/unscaled_RvE_with_counts.png')
         MP.make_rstat(CV_residuals, CV_model_errors, "{}, {}, Unscaled".format(model, dataset), save=True,
                     file_name=path + '/CV_Plots/unscaled_rstat.png')
         #scaled
@@ -59,6 +61,8 @@ for dataset in datasets:
                     file_name=path + '/CV_Plots/scaled_RvE.png')
         MP.make_rve_bin_counts(CV_model_errors*a + b, "{}, {}, Scaled".format(model, dataset), save=True,
                     file_name=path + '/CV_Plots/scaled_RvE_bin_counts.png')
+        MP.make_rve_with_bin_counts(CV_residuals, CV_model_errors * a + b, "{}, {}, Scaled".format(model, dataset), save=True,
+                    file_name=path + '/CV_Plots/scaled_RvE_with_counts.png')
         MP.make_rstat(CV_residuals, CV_model_errors*a + b, "{}, {}, Scaled".format(model, dataset), save=True,
                     file_name=path + '/CV_Plots/scaled_rstat.png')
 
@@ -73,6 +77,8 @@ for dataset in datasets:
                     file_name=path + '/Test_Plots/unscaled_RvE.png')
         MP.make_rve_bin_counts(Test_model_errors_unscaled, "{}, {}, Unscaled, Test Set".format(model, dataset), save=True,
                     file_name=path + '/Test_Plots/unscaled_RvE_bin_counts.png')
+        MP.make_rve_with_bin_counts(Test_residuals, Test_model_errors_unscaled, "{}, {}, Unscaled, Test Set".format(model, dataset),
+                    save=True, file_name=path + '/Test_Plots/unscaled_RvE_with_counts.png')
         MP.make_rstat(Test_residuals, Test_model_errors_unscaled, "{}, {}, Unscaled, Test Set".format(model, dataset), save=True,
                     file_name=path + '/Test_Plots/unscaled_rstat.png')
         #scaled
@@ -80,5 +86,7 @@ for dataset in datasets:
                     file_name=path + '/Test_Plots/scaled_RvE.png')
         MP.make_rve_bin_counts(Test_model_errors_scaled, "{}, {}, Scaled, Test Set".format(model, dataset), save=True,
                     file_name=path + '/Test_Plots/scaled_RvE_bin_counts.png')
+        MP.make_rve_with_bin_counts(Test_residuals, Test_model_errors_scaled, "{}, {}, Scaled, Test Set".format(model, dataset),
+                    save=True, file_name=path + '/Test_Plots/scaled_RvE_with_counts.png')
         MP.make_rstat(Test_residuals, Test_model_errors_scaled, "{}, {}, Scaled, Test Set".format(model, dataset), save=True,
                     file_name=path + '/Test_Plots/scaled_rstat.png')

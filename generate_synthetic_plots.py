@@ -4,7 +4,9 @@ from package import CorrectionFactors as cf
 from package import MakePlot as mp
 from package import TestData as td
 
-models = ["BT", "RF", "LR"]
+# Specify what models to run
+# Options: "RF", "GPR", "BT", "LR"
+models = ["GPR"]
 
 for model in models:
     print("STARTING {} Friedman 500".format(model))

@@ -1,0 +1,625 @@
+(base) Glenns-MacBook-Pro:ML-Error glennpalmer$ python generate_synthetic_plots.py && python generate_realdata_plots.py
+STARTING BT Friedman 500
+NLL optimization successful!
+Correction Factors:
+a: 0.812516324289124
+b: 0.06232423366993524
+r^2: 0.6442049346911876
+0 values deleted before making r-stat plot because model errors were zero.
+0 values deleted before making r-stat plot because model errors were zero.
+0 values deleted before making r-stat plot because model errors were zero.
+0 values deleted before making r-stat plot because model errors were zero.
+STARTING RF Friedman 500
+NLL optimization successful!
+Correction Factors:
+a: 0.4525098358886626
+b: 0.06903021343569746
+r^2: 0.7861450871331471
+0 values deleted before making r-stat plot because model errors were zero.
+0 values deleted before making r-stat plot because model errors were zero.
+0 values deleted before making r-stat plot because model errors were zero.
+0 values deleted before making r-stat plot because model errors were zero.
+STARTING LR Friedman 500
+NLL optimization successful!
+Correction Factors:
+a: 8.174358880791651
+b: -0.0637281546684859
+r^2: 0.7212380941962302
+0 values deleted before making r-stat plot because model errors were zero.
+0 values deleted before making r-stat plot because model errors were zero.
+0 values deleted before making r-stat plot because model errors were zero.
+0 values deleted before making r-stat plot because model errors were zero.
+STARTING BT Diffusion
+NLL optimization successful!
+Correction Factors:
+a: 0.9712245558945953
+b: 0.21412554372550438
+r^2: 0.5852426168259492
+0 values deleted before making r-stat plot because model errors were zero.
+0 values deleted before making r-stat plot because model errors were zero.
+NLL optimization successful!
+Correction Factors:
+a: 1.0404837801988336
+b: 0.2049881301516397
+r^2: 0.740639745298801
+NLL optimization successful!
+Correction Factors:
+a: 1.414779767466786
+b: 0.1731212425097374
+r^2: 0.6341905474495119
+NLL optimization successful!
+Correction Factors:
+a: 2.2510408133110356
+b: 0.08773466142423544
+r^2: 0.6150869729275907
+NLL optimization successful!
+Correction Factors:
+a: 0.8774308954519967
+b: 0.2251569705782669
+r^2: 0.26476064034889624
+NLL optimization successful!
+Correction Factors:
+a: 1.140522516886628
+b: 0.18171369575258367
+r^2: 0.5985241454680997
+NLL optimization successful!
+Correction Factors:
+a: 1.3275052515681742
+b: 0.18317001875215422
+r^2: 0.5043005895028876
+NLL optimization successful!
+Correction Factors:
+a: 0.4192695200636949
+b: 0.2697310206431361
+r^2: 0.3849487750346854
+NLL optimization successful!
+Correction Factors:
+a: 0.9009634842637545
+b: 0.2313296526009414
+r^2: 0.15287030448586258
+NLL optimization successful!
+Correction Factors:
+a: 1.1968401219036666
+b: 0.17174885850575622
+r^2: 0.6638553510915572
+NLL optimization successful!
+Correction Factors:
+a: 1.2501268766833094
+b: 0.1821672363180588
+r^2: 0.778343543811133
+NLL optimization successful!
+Correction Factors:
+a: 1.3628537881273184
+b: 0.14325719371052917
+r^2: 0.6346787901587587
+NLL optimization successful!
+Correction Factors:
+a: 1.1259839960324205
+b: 0.1931967819384518
+r^2: 0.5313450941647542
+NLL optimization successful!
+Correction Factors:
+a: 1.11254068094217
+b: 0.2062985356445664
+r^2: 0.5985907288314622
+NLL optimization successful!
+Correction Factors:
+a: 1.0555813137216115
+b: 0.19331361238881237
+r^2: 0.5123412767667455
+NLL optimization successful!
+Correction Factors:
+a: 1.1776095377259086
+b: 0.20418566867903756
+r^2: 0.6953070802716801
+NLL optimization successful!
+Correction Factors:
+a: 1.161642804327177
+b: 0.17124998291195112
+r^2: 0.5503909070988737
+NLL optimization successful!
+Correction Factors:
+a: 0.819515799416821
+b: 0.23962307357385576
+r^2: 0.37545553301863255
+NLL optimization successful!
+Correction Factors:
+a: 0.6798396372443615
+b: 0.2538599198981253
+r^2: 0.292467413929693
+NLL optimization successful!
+Correction Factors:
+a: 1.157705327952077
+b: 0.20245095667802004
+r^2: 0.7887837545835548
+NLL optimization successful!
+Correction Factors:
+a: 1.280984746748549
+b: 0.19070181998044142
+r^2: 0.5229734287643626
+NLL optimization successful!
+Correction Factors:
+a: 0.9683715143044246
+b: 0.1876117264328078
+r^2: 0.1425103204512369
+NLL optimization successful!
+Correction Factors:
+a: 1.3806556920442086
+b: 0.1791424449822998
+r^2: 0.6696856155580788
+NLL optimization successful!
+Correction Factors:
+a: 0.51716425019085
+b: 0.2699172236564784
+r^2: 0.27533901812105377
+NLL optimization successful!
+Correction Factors:
+a: 1.5218793294419743
+b: 0.13505348608115372
+r^2: 0.558745280095247
+NLL optimization successful!
+Correction Factors:
+a: 1.0747506084488632
+b: 0.19672478906785806
+r^2: 0.6293710070436518
+0 values deleted before making r-stat plot because model errors were zero.
+0 values deleted before making r-stat plot because model errors were zero.
+STARTING RF Diffusion
+NLL optimization successful!
+Correction Factors:
+a: 0.6818200333536727
+b: 0.014198088643196067
+r^2: 0.9500160503571471
+0 values deleted before making r-stat plot because model errors were zero.
+0 values deleted before making r-stat plot because model errors were zero.
+NLL optimization successful!
+Correction Factors:
+a: 0.6632563226528665
+b: 0.02111970465193646
+r^2: 0.9581503432839698
+NLL optimization successful!
+Correction Factors:
+a: 0.6638033278612347
+b: 0.04028790508395354
+r^2: 0.9026226590276226
+NLL optimization successful!
+Correction Factors:
+a: 0.7046319096848417
+b: 0.014947361199918211
+r^2: 0.93514509704031
+NLL optimization successful!
+Correction Factors:
+a: 0.5740427422157952
+b: 0.06832025464309453
+r^2: 0.8937122036809398
+NLL optimization successful!
+Correction Factors:
+a: 0.7406527053501011
+b: -0.024719128271054477
+r^2: 0.8908830323769394
+NLL optimization successful!
+Correction Factors:
+a: 0.6933096239572336
+b: 0.003881427583589083
+r^2: 0.9258765597712584
+NLL optimization successful!
+Correction Factors:
+a: 0.5909451694759491
+b: 0.051593594279262106
+r^2: 0.9641852887581513
+NLL optimization successful!
+Correction Factors:
+a: 0.6047000218674728
+b: 0.055939801424788285
+r^2: 0.9308187887376412
+NLL optimization successful!
+Correction Factors:
+a: 0.6903990430549933
+b: 0.0027386384031022276
+r^2: 0.9098854041574728
+NLL optimization successful!
+Correction Factors:
+a: 0.6452701179160394
+b: 0.040340133206248026
+r^2: 0.9674709208558653
+NLL optimization successful!
+Correction Factors:
+a: 0.6627848859554528
+b: 0.008946531860501023
+r^2: 0.9142756936858082
+NLL optimization successful!
+Correction Factors:
+a: 0.5741024787543798
+b: 0.06608311987668682
+r^2: 0.9128997688020162
+NLL optimization successful!
+Correction Factors:
+a: 0.662483108043713
+b: 0.04604452970623969
+r^2: 0.8538720755389086
+NLL optimization successful!
+Correction Factors:
+a: 0.7009208843704324
+b: -0.00674114949522479
+r^2: 0.9739901920683746
+NLL optimization successful!
+Correction Factors:
+a: 0.6292060319706809
+b: 0.04970398122668859
+r^2: 0.9264318791791832
+NLL optimization successful!
+Correction Factors:
+a: 0.6382033499804439
+b: 0.029089131452582916
+r^2: 0.8482357808494086
+NLL optimization successful!
+Correction Factors:
+a: 0.6213373376965607
+b: 0.054649304209224786
+r^2: 0.9323026452053427
+NLL optimization successful!
+Correction Factors:
+a: 0.6875200710804616
+b: 0.013295996445692262
+r^2: 0.965403432883705
+NLL optimization successful!
+Correction Factors:
+a: 0.6699715546347773
+b: 0.03503725793696259
+r^2: 0.8999440713072117
+NLL optimization successful!
+Correction Factors:
+a: 0.6275523028272133
+b: 0.04570235734933964
+r^2: 0.8895341304646721
+NLL optimization successful!
+Correction Factors:
+a: 0.7524094090233102
+b: -0.023550162454262096
+r^2: 0.9217200456990274
+NLL optimization successful!
+Correction Factors:
+a: 0.6526612309625595
+b: 0.045942284205488494
+r^2: 0.8974247102689661
+NLL optimization successful!
+Correction Factors:
+a: 0.6592075818955159
+b: 0.02090236979840391
+r^2: 0.9426379774738414
+NLL optimization successful!
+Correction Factors:
+a: 0.6252360536013534
+b: 0.04210020396234529
+r^2: 0.8544720355644597
+NLL optimization successful!
+Correction Factors:
+a: 0.6640407097134822
+b: 0.03893328229914328
+r^2: 0.8937772128467261
+0 values deleted before making r-stat plot because model errors were zero.
+0 values deleted before making r-stat plot because model errors were zero.
+STARTING LR Diffusion
+NLL optimization successful!
+Correction Factors:
+a: 0.9112490943537763
+b: 0.1670502687789373
+r^2: 0.6491955524500455
+0 values deleted before making r-stat plot because model errors were zero.
+0 values deleted before making r-stat plot because model errors were zero.
+NLL optimization successful!
+Correction Factors:
+a: 0.8320679245976023
+b: 0.18488955731068252
+r^2: 0.8245670576509061
+NLL optimization successful!
+Correction Factors:
+a: 0.8216838845153133
+b: 0.19727177088394648
+r^2: 0.5519953463249562
+NLL optimization successful!
+Correction Factors:
+a: 0.9988978444242049
+b: 0.1482918755698821
+r^2: 0.7828888899157477
+NLL optimization successful!
+Correction Factors:
+a: 1.0325222450239575
+b: 0.12602548118071044
+r^2: 0.6984164140674428
+NLL optimization successful!
+Correction Factors:
+a: 1.0590994936684448
+b: 0.10931900169003222
+r^2: 0.7485384276728543
+NLL optimization successful!
+Correction Factors:
+a: 1.1156381044651416
+b: 0.08215883456997759
+r^2: 0.5079094515616245
+NLL optimization successful!
+Correction Factors:
+a: 0.788214441179535
+b: 0.19755120366061557
+r^2: 0.7485210954400826
+NLL optimization successful!
+Correction Factors:
+a: 1.081501482338126
+b: 0.10130888276622385
+r^2: 0.7526534158148763
+NLL optimization successful!
+Correction Factors:
+a: 0.8569115888450733
+b: 0.1761764421639693
+r^2: 0.8099895125829034
+NLL optimization successful!
+Correction Factors:
+a: 0.8121448781349071
+b: 0.19919691482866192
+r^2: 0.5037988887461557
+NLL optimization successful!
+Correction Factors:
+a: 1.0242994378335983
+b: 0.10624193302681173
+r^2: 0.9019877206424303
+NLL optimization successful!
+Correction Factors:
+a: 0.9551948134014365
+b: 0.13561639849586288
+r^2: 0.7892760591015779
+NLL optimization successful!
+Correction Factors:
+a: 0.8749212954445329
+b: 0.175036573245535
+r^2: 0.6697017876867033
+NLL optimization successful!
+Correction Factors:
+a: 0.8340051404244062
+b: 0.18334084667882428
+r^2: 0.6159438999046112
+NLL optimization successful!
+Correction Factors:
+a: 0.8536918939964651
+b: 0.18630400441089173
+r^2: 0.8173154371536919
+NLL optimization successful!
+Correction Factors:
+a: 0.8790968656358535
+b: 0.1563169592122596
+r^2: 0.8747919578364238
+NLL optimization successful!
+Correction Factors:
+a: 0.9413665000306848
+b: 0.1427659713850861
+r^2: 0.6509707705331993
+NLL optimization successful!
+Correction Factors:
+a: 0.7451060423584005
+b: 0.22474322969176952
+r^2: 0.6452666011317981
+NLL optimization successful!
+Correction Factors:
+a: 0.9302628952973262
+b: 0.14897350308483226
+r^2: 0.8388591636090799
+NLL optimization successful!
+Correction Factors:
+a: 1.0011883159777932
+b: 0.12358023634165533
+r^2: 0.5124498511931901
+NLL optimization successful!
+Correction Factors:
+a: 0.936217360782617
+b: 0.1340164961493363
+r^2: 0.7003058980289616
+NLL optimization successful!
+Correction Factors:
+a: 0.7758457328332748
+b: 0.20655550346673945
+r^2: 0.8479915717827782
+NLL optimization successful!
+Correction Factors:
+a: 1.1051934798407061
+b: 0.08754275070113905
+r^2: 0.7467743629013607
+NLL optimization successful!
+Correction Factors:
+a: 1.0464730012047714
+b: 0.1297442169225898
+r^2: 0.5348624686902739
+NLL optimization successful!
+Correction Factors:
+a: 0.7841988382376288
+b: 0.20716699194221588
+r^2: 0.574112220875354
+0 values deleted before making r-stat plot because model errors were zero.
+0 values deleted before making r-stat plot because model errors were zero.
+STARTING BT Perovskite
+NLL optimization successful!
+Correction Factors:
+a: 0.9837474064311392
+b: 0.2112343294090022
+r^2: 0.5923699695469002
+0 values deleted before making r-stat plot because model errors were zero.
+0 values deleted before making r-stat plot because model errors were zero.
+NLL optimization successful!
+Correction Factors:
+a: 1.0637637349367863
+b: 0.20417269455470016
+r^2: 0.7283144584032607
+NLL optimization successful!
+Correction Factors:
+a: 1.4166572033766878
+b: 0.17289509165989597
+r^2: 0.6383567405328586
+NLL optimization successful!
+Correction Factors:
+a: 2.2445776783539206
+b: 0.08965438707564302
+r^2: 0.6517285362819172
+NLL optimization successful!
+Correction Factors:
+a: 0.8988997641520239
+b: 0.22292543987498498
+r^2: 0.33508310006457454
+NLL optimization successful!
+Correction Factors:
+a: 1.1263553999550098
+b: 0.18203394109247312
+r^2: 0.6132630333729745
+NLL optimization successful!
+Correction Factors:
+a: 1.4161725389630937
+b: 0.17197085682643526
+r^2: 0.5221148430985267
+NLL optimization successful!
+Correction Factors:
+a: 0.43056841750966823
+b: 0.2681497366019773
+r^2: 0.3550374347011601
+NLL optimization successful!
+Correction Factors:
+a: 0.8377055290399036
+b: 0.2370418787933457
+r^2: 0.14323759068681596
+NLL optimization successful!
+Correction Factors:
+a: 1.1532116382418403
+b: 0.17514322620972828
+r^2: 0.6269282671241161
+NLL optimization successful!
+Correction Factors:
+a: 1.2562224854005732
+b: 0.18170148378849232
+r^2: 0.7022629487621406
+0 values deleted before making r-stat plot because model errors were zero.
+0 values deleted before making r-stat plot because model errors were zero.
+STARTING RF Perovskite
+NLL optimization successful!
+Correction Factors:
+a: 0.6830095109985435
+b: 0.011488466775660674
+r^2: 0.9440728920337667
+0 values deleted before making r-stat plot because model errors were zero.
+0 values deleted before making r-stat plot because model errors were zero.
+NLL optimization successful!
+Correction Factors:
+a: 0.6923017662675122
+b: 0.0037668974316461927
+r^2: 0.9583751979539311
+NLL optimization successful!
+Correction Factors:
+a: 0.6230320664481499
+b: 0.06255698580549976
+r^2: 0.9321819491346399
+NLL optimization successful!
+Correction Factors:
+a: 0.6382801204905058
+b: 0.04389750559339055
+r^2: 0.9472037421129935
+NLL optimization successful!
+Correction Factors:
+a: 0.6409821829537625
+b: 0.03471154880330516
+r^2: 0.8864318124578061
+NLL optimization successful!
+Correction Factors:
+a: 0.7362606818468895
+b: -0.02033201652403797
+r^2: 0.8645387564577991
+NLL optimization successful!
+Correction Factors:
+a: 0.6350794642959487
+b: 0.03382667310681946
+r^2: 0.9429391649688673
+NLL optimization successful!
+Correction Factors:
+a: 0.5911337147617757
+b: 0.048668412415082955
+r^2: 0.9274560878975389
+NLL optimization successful!
+Correction Factors:
+a: 0.5907219052613111
+b: 0.06198889245804497
+r^2: 0.9183177905634509
+NLL optimization successful!
+Correction Factors:
+a: 0.6615189750139456
+b: 0.012953537596104795
+r^2: 0.9659578152387178
+NLL optimization successful!
+Correction Factors:
+a: 0.6542541519719443
+b: 0.037631936261822305
+r^2: 0.9356736836628124
+0 values deleted before making r-stat plot because model errors were zero.
+0 values deleted before making r-stat plot because model errors were zero.
+STARTING LR Perovskite
+NLL optimization successful!
+Correction Factors:
+a: 0.8906322986784059
+b: 0.1679246171737822
+r^2: 0.8433994681345804
+0 values deleted before making r-stat plot because model errors were zero.
+0 values deleted before making r-stat plot because model errors were zero.
+NLL optimization successful!
+Correction Factors:
+a: 0.8078663329066444
+b: 0.19535207100708157
+r^2: 0.7988383223694504
+NLL optimization successful!
+Correction Factors:
+a: 0.8551667294478542
+b: 0.1858915263729008
+r^2: 0.5588219673372423
+NLL optimization successful!
+Correction Factors:
+a: 1.061147872193686
+b: 0.12193309961571637
+r^2: 0.8823011768055038
+NLL optimization successful!
+Correction Factors:
+a: 0.9773548622558841
+b: 0.14783295162020776
+r^2: 0.6713405083370704
+NLL optimization successful!
+Correction Factors:
+a: 1.042500788954142
+b: 0.11519464560735909
+r^2: 0.8451191847453476
+NLL optimization successful!
+Correction Factors:
+a: 1.0850549933717333
+b: 0.09249413467843107
+r^2: 0.5335795554262851
+NLL optimization successful!
+Correction Factors:
+a: 0.7764727832527747
+b: 0.20085762604120155
+r^2: 0.7430989287869187
+NLL optimization successful!
+Correction Factors:
+a: 1.108681865390904
+b: 0.09356279615763488
+r^2: 0.7292703476346039
+NLL optimization successful!
+Correction Factors:
+a: 0.8636989338370286
+b: 0.17347303746044743
+r^2: 0.7526786743747357
+NLL optimization successful!
+Correction Factors:
+a: 0.826468801591683
+b: 0.19481141973886934
+r^2: 0.5014683714481608
+0 values deleted before making r-stat plot because model errors were zero.
+0 values deleted before making r-stat plot because model errors were zero.
+
+
+
+#### GPR (copy/pasted results) #####
+NLL optimization successful!
+Correction Factors:
+a: 0.7116402857911439
+b: -0.0004853610212230704
+r^2: 0.9399728513688715

@@ -90,7 +90,7 @@ class MakePlot:
                 print("save is set to True, but no file path specified")
             else:
                 plt.savefig(file_name, dpi=300)
-
+        plt.close(fig)
         return model_errors, abs_res, r_squared, slope, intercept, binned_model_errors, RMS_abs_res, xfit, yfit
 
     def make_rve_bin_counts(self, model_errors, title, save=False, file_name=None, number_of_bins=15):
@@ -118,6 +118,7 @@ class MakePlot:
                 print("save is set to True, but no file path specified")
             else:
                 plt.savefig(file_name, dpi=300)
+        plt.close(fig)
         return 0
 
     def make_rve_with_bin_counts(self, residuals, model_errors, title, save=False, file_name=None, number_of_bins=15):
@@ -206,7 +207,7 @@ class MakePlot:
                 print("save is set to True, but no file path specified")
             else:
                 plt.savefig(file_name, dpi=300)
-
+        plt.close(fig)
         return model_errors, abs_res, r_squared, slope, intercept, binned_model_errors, RMS_abs_res, xfit, yfit
 
     def make_rstat(self, residuals, model_errors, title, save=False, file_name=None):
@@ -237,6 +238,7 @@ class MakePlot:
                 print("save is set to True, but no file path specified")
             else:
                 plt.savefig(file_name, dpi=300)
+        plt.close(fig)
         return 0
 
     def make_convergence_plot(self, convergence_data, title, parameter, save=False, file_name=None):
@@ -261,3 +263,4 @@ class MakePlot:
                 print("save is set to True, but no file path specified")
             else:
                 plt.savefig(file_name, dpi=300)
+        plt.close(fig)
