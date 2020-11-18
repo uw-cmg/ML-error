@@ -58,6 +58,8 @@ class TestData:
 		RF_unscaled_model_errors = np.asarray([])
 		RF_scaled_model_errors = np.asarray([])
 		RF_resid = np.asarray([])
+		a_array = []
+		b_array = []
 		for train_index, test_index in rkf.split(X_values):
 			X_train, X_test = X_values[train_index], X_values[test_index]
 			y_train, y_test = y_values[train_index], y_values[test_index]
@@ -75,6 +77,9 @@ class TestData:
 			print('a: ' + str(a))
 			print('b: ' + str(b))
 			print('r^2: ' + str(r_squared))
+			# Record the newly calculated a and b values
+			a_array.append(a)
+			b_array.append(b)
 			# Get test data residuals and model errors
 			Test_residuals, Test_model_errors = self._get_RF(X_train, y_train, X_test, y_test, model_num)
 			# Scale by standard deviation
@@ -86,7 +91,9 @@ class TestData:
 			RF_unscaled_model_errors = np.concatenate((RF_unscaled_model_errors, Test_model_errors), axis=None)
 			RF_scaled_model_errors = np.concatenate((RF_scaled_model_errors, Test_model_errors_scaled), axis=None)
 			RF_resid = np.concatenate((RF_resid, Test_residuals), axis=None)
-		return RF_resid, RF_unscaled_model_errors, RF_scaled_model_errors
+		a_array = np.asarray(a_array)
+		b_array = np.asarray(b_array)
+		return RF_resid, RF_unscaled_model_errors, RF_scaled_model_errors, a_array, b_array
 
 	def _get_LR(self, X_train, y_train, X_test, y_test, model_num):
 		LR = lr.LinReg()
@@ -108,6 +115,8 @@ class TestData:
 		LR_unscaled_model_errors = np.asarray([])
 		LR_scaled_model_errors = np.asarray([])
 		LR_resid = np.asarray([])
+		a_array = []
+		b_array = []
 		for train_index, test_index in rkf.split(X_values):
 			X_train, X_test = X_values[train_index], X_values[test_index]
 			y_train, y_test = y_values[train_index], y_values[test_index]
@@ -125,6 +134,9 @@ class TestData:
 			print('a: ' + str(a))
 			print('b: ' + str(b))
 			print('r^2: ' + str(r_squared))
+			# Record the newly calculated a and b values
+			a_array.append(a)
+			b_array.append(b)
 			# Get test data residuals and model errors
 			Test_residuals, Test_model_errors = self._get_LR(X_train, y_train, X_test, y_test, model_num)
 			# Scale by standard deviation
@@ -136,7 +148,9 @@ class TestData:
 			LR_unscaled_model_errors = np.concatenate((LR_unscaled_model_errors, Test_model_errors), axis=None)
 			LR_scaled_model_errors = np.concatenate((LR_scaled_model_errors, Test_model_errors_scaled), axis=None)
 			LR_resid = np.concatenate((LR_resid, Test_residuals), axis=None)
-		return LR_resid, LR_unscaled_model_errors, LR_scaled_model_errors
+		a_array = np.asarray(a_array)
+		b_array = np.asarray(b_array)
+		return LR_resid, LR_unscaled_model_errors, LR_scaled_model_errors, a_array, b_array
 
 	def _get_BT(self, X_train, y_train, X_test, y_test, model_num):
 		BT = bt.BoostedTrees()
@@ -208,6 +222,8 @@ class TestData:
 		unscaled_model_errors = np.asarray([])
 		scaled_model_errors = np.asarray([])
 		resid = np.asarray([])
+		a_array = []
+		b_array = []
 		for train_index, test_index in rkf.split(X_values):
 			X_train, X_test = X_values[train_index], X_values[test_index]
 			y_train, y_test = y_values[train_index], y_values[test_index]
@@ -225,6 +241,9 @@ class TestData:
 			print('a: ' + str(a))
 			print('b: ' + str(b))
 			print('r^2: ' + str(r_squared))
+			# Record the newly calculated a and b values
+			a_array.append(a)
+			b_array.append(b)
 			# Get test data residuals and model errors
 			Test_residuals, Test_model_errors = self._get_GPR(X_train, y_train, X_test, y_test, model_num)
 			# Scale by standard deviation
@@ -236,4 +255,6 @@ class TestData:
 			unscaled_model_errors = np.concatenate((unscaled_model_errors, Test_model_errors), axis=None)
 			scaled_model_errors = np.concatenate((scaled_model_errors, Test_model_errors_scaled), axis=None)
 			resid = np.concatenate((resid, Test_residuals), axis=None)
-		return resid, unscaled_model_errors, scaled_model_errors
+		a_array = np.asarray(a_array)
+		b_array = np.asarray(b_array)
+		return resid, unscaled_model_errors, scaled_model_errors, a_array, b_array
