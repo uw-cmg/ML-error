@@ -6,12 +6,12 @@ from package import TestData as td
 
 # Specify what models to run
 # Options: "RF", "GPR", "BT", "LR"
-models = ["RF"]
+models = ["GPR"]
 
 for model in models:
     print("STARTING {} Friedman 500".format(model))
     # Path to save files
-    path = 'Supplemental_Info/Friedman_500/50-Fold/{}'.format(model)
+    path = 'Supplemental_Info/Friedman_500/5-Fold/{}'.format(model)
     #path = 'plots/'
 
     # Load data
@@ -42,10 +42,10 @@ for model in models:
     #b = b / stdev
 
     # Save np arrays of unscaled and scaled CV data
-    np.save('data_for_paper_plots/Friedman_500/{}_50fold/CV/a'.format(model), np.asarray([a]))
-    np.save('data_for_paper_plots/Friedman_500/{}_50fold/CV/b'.format(model), np.asarray([b]))
-    np.save('data_for_paper_plots/Friedman_500/{}_50fold/CV/CV_residuals'.format(model), CV_residuals)
-    np.save('data_for_paper_plots/Friedman_500/{}_50fold/CV/CV_model_errors'.format(model), CV_model_errors)
+    np.save('data_for_paper_plots/Friedman_500/{}/CV/a'.format(model), np.asarray([a]))
+    np.save('data_for_paper_plots/Friedman_500/{}/CV/b'.format(model), np.asarray([b]))
+    np.save('data_for_paper_plots/Friedman_500/{}/CV/CV_residuals'.format(model), CV_residuals)
+    np.save('data_for_paper_plots/Friedman_500/{}/CV/CV_model_errors'.format(model), CV_model_errors)
 
 
     # Make scaled and unscaled CV plots
@@ -82,10 +82,10 @@ for model in models:
     Test_model_errors = Test_model_errors / stdev
 
     # Save np arrays of unscaled and scaled Test data
-    np.save('data_for_paper_plots/Friedman_500/{}_50fold/Test/a'.format(model), np.asarray([a]))
-    np.save('data_for_paper_plots/Friedman_500/{}_50fold/Test/b'.format(model), np.asarray([b]))
-    np.save('data_for_paper_plots/Friedman_500/{}_50fold/Test/Test_residuals'.format(model), Test_residuals)
-    np.save('data_for_paper_plots/Friedman_500/{}_50fold/Test/Test_model_errors'.format(model), Test_model_errors)
+    np.save('data_for_paper_plots/Friedman_500/{}/Test/a'.format(model), np.asarray([a]))
+    np.save('data_for_paper_plots/Friedman_500/{}/Test/b'.format(model), np.asarray([b]))
+    np.save('data_for_paper_plots/Friedman_500/{}/Test/Test_residuals'.format(model), Test_residuals)
+    np.save('data_for_paper_plots/Friedman_500/{}/Test/Test_model_errors'.format(model), Test_model_errors)
 
     # Make scaled and unscaled test data plots
     MP.make_rve(Test_residuals, Test_model_errors, "{}, Friedman 500, Unscaled, Test Set".format(model), save=True,
