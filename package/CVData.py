@@ -27,7 +27,7 @@ class CVData:
 			print("No valid model type was provided in the 'get_residuals_and_model_errors' CVData method.")
 
 	def _get_RF(self, X_values, y_values, model_num, random_state):
-		rkf = RepeatedKFold(n_splits=10, n_repeats=4, random_state=random_state)
+		rkf = RepeatedKFold(n_splits=5, n_repeats=4, random_state=random_state)
 		# RF
 		RF_model_errors = np.asarray([])
 		RF_resid = np.asarray([])

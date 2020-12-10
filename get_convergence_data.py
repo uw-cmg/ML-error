@@ -1,28 +1,40 @@
 from package import ConvergenceData as cd
+from package import MakePlot as mp
 import numpy as np
 
 
+datasets = ["Diffusion", "Friedman_500", "Perovskite"]
+models = ["LR", "RF"]
 
-# Load data
-X_train = np.load('friedman_500_data/training_x_values.npy')
-y_train = np.load('friedman_500_data/training_y_values.npy')
+for dataset in datasets:
+    for model in models:
+        print("Starting convergence test runs for {}, {}".format(dataset, model))
 
+        # Load data
+        if dataset == "Friedman_500":
+            X_train = np.load('friedman_500_data/training_x_values.npy')
+            y_train = np.load('friedman_500_data/training_y_values.npy')
+        elif dataset == "Diffusion":
+            X_train = np.load('diffusion_data/all_x_values.npy')
+            y_train = np.load('diffusion_data/all_y_values.npy')
+        elif dataset == "Perovskite":
+            X_train = np.load('perovskite_data/all_x_values.npy')
+            y_train = np.load('perovskite_data/all_y_values.npy')
+        else:
+            print("No valid dataset provided. '{}' is not an option for dataset choice.".format(dataset))
+            break
 
-CD = cd.ConvergenceData()
-#a_direct, b_direct, r_squared_direct, a_direct_unscaled, b_direct_unscaled, r_squared_direct_unscaled,\
-			#a_res_v_err, b_res_v_err, r_squared_res_v_err = CD.all([50,100,150,200,250,300,350,400,450,500,550,600,650,700,750,800,850,900,950,1000], "RF", X_train, y_train, num_averaged=10)
+        CD = cd.ConvergenceData()
 
-a_nll, b_nll = CD.nll([50,100,150,200,250,300,350,400,450,500,550,600,650,700,750,800,850,900,950,1000], "RF", X_train, y_train, num_averaged=10)
+        a_nll, b_nll = CD.nll([50,100,200,500,1000], model, X_train, y_train, num_averaged=10)
 
-np.save('friedman_500_data/a_nll.npy', np.asarray(a_nll))
-np.save('friedman_500_data/b_nll.npy', np.asarray(b_nll))
+        np.save('data_for_paper_plots/{}/{}/Convergence/a_nll.npy'.format(dataset, model), np.asarray(a_nll))
+        np.save('data_for_paper_plots/{}/{}/Convergence/b_nll.npy'.format(dataset, model), np.asarray(b_nll))
 
-#np.save('friedman_500_data/a_direct.npy', np.asarray(a_direct))
-#np.save('friedman_500_data/b_direct.npy', np.asarray(b_direct))
-#np.save('friedman_500_data/r_squared_direct.npy', np.asarray(r_squared_direct))
-#np.save('friedman_500_data/a_direct_unscaled.npy', np.asarray(a_direct_unscaled))
-#np.save('friedman_500_data/b_direct_unscaled.npy', np.asarray(b_direct_unscaled))
-#np.save('friedman_500_data/r_squared_direct_unscaled.npy', np.asarray(r_squared_direct_unscaled))
-#np.save('friedman_500_data/a_rve.npy', np.asarray(a_res_v_err))
-#np.save('friedman_500_data/b_rve.npy', np.asarray(b_res_v_err))
-#np.save('friedman_500_data/r_squared_rve.npy', np.asarray(r_squared_res_v_err))
+        # Create and save plots
+        MP = mp.MakePlot()
+
+        MP.make_convergence_plot(a_nll, "{}, {}, NLL Optimization".format(model, dataset), "a (slope)", save=True,
+                                 file_name='Supplemental_Info/{}/5-fold/{}/Convergence_Plots/a_nll'.format(dataset, model))
+        MP.make_convergence_plot(b_nll, "{}, {}, NLL Optimization", "b (intercept)".format(model, dataset), save=True,
+                                 file_name='Supplemental_Info/{}/5-fold/{}/Convergence_Plots/b_nll'.format(dataset, model))

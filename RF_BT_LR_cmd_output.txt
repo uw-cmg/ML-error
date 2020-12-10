@@ -623,3 +623,32 @@ Correction Factors:
 a: 0.7116402857911439
 b: -0.0004853610212230704
 r^2: 0.9399728513688715
+
+
+#### RF 10-fold Friedman 500 ####
+NLL optimization successful!
+Correction Factors:
+a: 0.3863518694254198
+b: 0.08126872746281366
+r^2: 0.8243112780739885
+
+#### RF 2-fold Friedman 500 ####
+NLL optimization successful!
+Correction Factors:
+a: 0.5011256631959293
+b: 0.07256681946304232
+r^2: 0.7841467688157959
+
+#### RF 20-fold Friedman 500 ####
+NLL optimization successful!
+Correction Factors:
+a: 0.3802651380085699
+b: 0.08247190925031925
+r^2: 0.7458811261970117
+
+#### RF 50-fold Friedman 500 ####
+NLL optimization successful!
+Correction Factors:
+a: 0.36283152301989663
+b: 0.08377650070924918
+r^2: 0.7277117171838812
