@@ -21,7 +21,8 @@ class GPR:
         self.sc = StandardScaler()
         self.X_train = self.sc.fit_transform(X_train)
         self.y_train = y_train
-        self.kernel = ConstantKernel()*RBF()
+        #self.kernel = ConstantKernel()*RBF()
+        self.kernel = ConstantKernel() + 1.0 ** 2 * Matern(length_scale=2.0, nu=1.5) + WhiteKernel(noise_level=1)
         base_model = GaussianProcessRegressor(kernel=self.kernel, alpha=0.00001, n_restarts_optimizer=30, normalize_y=False).fit(self.X_train, self.y_train)
         self.gpr = BaggingRegressor(base_estimator=base_model, n_estimators=model_num).fit(self.X_train,
                                                                                                 self.y_train)
