@@ -20,10 +20,12 @@ for dataset in datasets:
         #path = 'plots/'
 
         # Load data
-        # X_train = np.load('perovskite_data/all_x_values.npy')
-        # y_train = np.load('perovskite_data/all_y_values.npy')
-        X_train = np.load('ML-error/diffusion_data/all_x_values.npy')
-        y_train = np.load('ML-error/diffusion_data/all_y_values.npy')
+        if dataset == "Perovskite":
+            X_train = np.load('ML-error/perovskite_data/all_x_values.npy')
+            y_train = np.load('ML-error/perovskite_data/all_y_values.npy')
+        elif dataset == "Diffusion":
+            X_train = np.load('ML-error/diffusion_data/all_x_values.npy')
+            y_train = np.load('ML-error/diffusion_data/all_y_values.npy')
 
         # Cut down to just 80% of the data to make CV graphs for a single split
         X_train_split, X_test_split, y_train_split, y_test_split = train_test_split(X_train, y_train, test_size=0.2, random_state=91936274)

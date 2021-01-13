@@ -217,7 +217,7 @@ class TestData:
 		if dataset == "Diffusion":
 			rkf = RepeatedKFold(n_splits=5, n_repeats=5, random_state=random_state)
 		elif dataset == "Perovskite":
-			rkf = RepeatedKFold(n_splits=5, n_repeats=2, random_state=random_state)
+			rkf = RepeatedKFold(n_splits=5, n_repeats=1, random_state=random_state)
 		else:
 			rkf = RepeatedKFold(n_splits=5, n_repeats=2, random_state=random_state)
 			print("Neither 'Diffusion' nor 'Perovskite' was specified as the dataset for get_residuals_and_model_errors_looped function.")
