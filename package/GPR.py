@@ -50,5 +50,5 @@ class GPR:
 
     def predict_single(self, x_test, retstd=True):
         x_pred = self.sc.transform(x_test)
-        pred, std = self.gp.predict(x_pred, return_std=retstd)
+        pred, std = self.gpr.predict(x_pred, return_std=retstd)
         return pred, std
