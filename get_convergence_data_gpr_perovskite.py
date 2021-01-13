@@ -26,7 +26,7 @@ for dataset in datasets:
 
         CD = cd.ConvergenceData()
 
-        a_nll, b_nll = CD.nll([50,100,200,500,1000], model, X_train, y_train, num_averaged=10)
+        a_nll, b_nll = CD.nll([50,100,200], model, X_train, y_train, num_averaged=1)
 
         np.save('ML-error/data_for_paper_plots/{}/{}/Convergence/a_nll.npy'.format(dataset, model), np.asarray(a_nll))
         np.save('ML-error/data_for_paper_plots/{}/{}/Convergence/b_nll.npy'.format(dataset, model), np.asarray(b_nll))
