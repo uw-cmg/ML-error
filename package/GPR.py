@@ -39,3 +39,16 @@ class GPR:
             error.append(statistics.stdev(preds))
         error = np.array(error)
         return self.gpr.predict(x_pred), error
+
+    def train_single(self, X_train, y_train):
+        # Scale features
+        self.sc = StandardScaler()
+        self.X_train = self.sc.fit_transform(X_train)
+        self.y_train = y_train
+        self.kernel = ConstantKernel() + 1.0 ** 2 * Matern(length_scale=2.0, nu=1.5) + WhiteKernel(noise_level=1)
+        self.gpr = GaussianProcessRegressor(kernel=self.kernel, alpha=0.00001, n_restarts_optimizer=30, normalize_y=False).fit(self.X_train, self.y_train)
+
+    def predict_single(self, x_test, retstd=True):
+        x_pred = self.sc.transform(x_test)
+        pred, std = self.gp.predict(x_pred, return_std=retstd)
+        return pred, std

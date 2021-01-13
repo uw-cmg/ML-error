@@ -264,3 +264,96 @@ class MakePlot:
             else:
                 plt.savefig(file_name, dpi=300)
         plt.close(fig)
+
+    def make_rve_with_bin_counts_and_slope_1_line(self, residuals, model_errors, title, save=False, file_name=None, number_of_bins=15):
+        # Define input data -- divide by standard deviation
+        abs_res = abs(residuals)
+
+        # check to see if number of bins should increase, and increase it if so
+        model_errors_sorted = np.sort(model_errors)
+        ninety_percentile = int(len(model_errors_sorted) * 0.9)
+        ninety_percentile_range = model_errors_sorted[ninety_percentile] - np.amin(model_errors)
+        total_range = np.amax(model_errors) - np.amin(model_errors)
+        number_of_bins = number_of_bins
+        if ninety_percentile_range / total_range < 5 / number_of_bins:
+            number_of_bins = int(5 * total_range / ninety_percentile_range)
+
+        # Set bins for calculating RMS
+        upperbound = np.amax(model_errors)
+        lowerbound = np.amin(model_errors)
+        bins = np.linspace(lowerbound, upperbound, number_of_bins, endpoint=False)
+
+        # Create a vector determining bin of each data point
+        digitized = np.digitize(model_errors, bins)
+
+        # Record which bins contain data (to avoid trying to do calculations on empty bins)
+        bins_present = []
+        for i in range(1, number_of_bins + 1):
+            if i in digitized:
+                bins_present.append(i)
+
+        # Create array of weights based on counts in each bin
+        weights = []
+        for i in range(1, number_of_bins + 1):
+            if i in digitized:
+                weights.append(np.count_nonzero(digitized == i))
+
+        # Calculate RMS of the absolute residuals
+        RMS_abs_res = [np.sqrt((abs_res[digitized == bins_present[i]] ** 2).mean()) for i in
+                       range(0, len(bins_present))]
+
+        # Set the x-values to the midpoint of each bin
+        bin_width = bins[1] - bins[0]
+        binned_model_errors = np.zeros(len(bins_present))
+        for i in range(0, len(bins_present)):
+            curr_bin = bins_present[i]
+            binned_model_errors[i] = bins[curr_bin - 1] + bin_width / 2
+
+        # Fit a line to the data
+        model = LinearRegression(fit_intercept=True)
+        model.fit(binned_model_errors[:, np.newaxis],
+                  RMS_abs_res,
+                  sample_weight=weights)  #### SELF: Can indicate subset of points to fit to using ":" --> "a:b"
+        xfit = binned_model_errors
+        yfit = model.predict(xfit[:, np.newaxis])
+
+        # Calculate r^2 value
+        r_squared = r2_score(RMS_abs_res, yfit, sample_weight=weights)
+        # Calculate slope
+        slope = model.coef_
+        # Calculate y-intercept
+        intercept = model.intercept_
+
+        # Create RvE plot
+        fig = plt.figure()
+        ax = fig.add_subplot(3,1,(2,3))
+        x = np.linspace(lowerbound, upperbound, 100)
+        ax.plot(x, x, color='red', label='identity function')
+        #ax.set_title('Binned RvE Plot -- {}'.format(title))
+        ax.set_xlabel('model error estimates / standard deviation')
+        ax.set_ylabel('residuals / standard deviation')
+        ax.plot(binned_model_errors, RMS_abs_res, 'o', color='blue')
+        ax.plot(xfit, yfit, color='blue', label='fitted line')
+        ax.text(0.04, 0.92, 'r^2 = %.3f' % (r_squared), transform=ax.transAxes)
+        ax.text(0.04, 0.85, 'slope = %.3f' % (slope), transform=ax.transAxes)
+        ax.text(0.04, 0.78, 'y-intercept = %.3f' % (intercept), transform=ax.transAxes)
+        ax.legend(loc="lower right")
+
+        ax = fig.add_subplot(3,1,1)
+        ax.set_title('Binned RvE Plot -- {}'.format(title))
+        #ax.set_xlabel('model error estimates / standard deviation')
+        ax.set_xticks([])
+        #ax_set_xticklabels([])
+        ax.set_ylabel('bin counts')
+        ax.set_xlim([0.05, 0.8])
+        ax.hist(model_errors, bins=number_of_bins, color='blue', edgecolor='black')
+
+        if save is False:
+            plt.show()
+        elif save is True:
+            if file_name is None:
+                print("save is set to True, but no file path specified")
+            else:
+                plt.savefig(file_name, dpi=300)
+        plt.close(fig)
+        return model_errors, abs_res, r_squared, slope, intercept, binned_model_errors, RMS_abs_res, xfit, yfit

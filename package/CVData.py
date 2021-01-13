@@ -23,6 +23,8 @@ class CVData:
 			return self._get_BT(X_train, y_train, model_num, random_state)
 		elif model_type == "GPR":
 			return self._get_GPR(X_train, y_train, model_num, random_state)
+		elif model_type == "GPR_Bayesian":
+			return self._get_GPR_bayes(X_train, y_train, random_state)
 		else:
 			print("No valid model type was provided in the 'get_residuals_and_model_errors' CVData method.")
 
@@ -88,6 +90,23 @@ class CVData:
 			GPR = gpr.GPR()
 			GPR.train(X_train, y_train, model_num)
 			pred, errors = GPR.predict(X_test, True)
+			res = y_test - pred
+			model_errors = np.concatenate((model_errors, errors), axis=None)
+			resid = np.concatenate((resid, res), axis=None)
+
+		return resid, model_errors
+
+	def _get_GPR_bayes(self, X_values, y_values, random_state):
+		rkf = RepeatedKFold(n_splits=5, n_repeats=4, random_state=random_state)
+		# GPR
+		model_errors = np.asarray([])
+		resid = np.asarray([])
+		for train_index, test_index in rkf.split(X_values):
+			X_train, X_test = X_values[train_index], X_values[test_index]
+			y_train, y_test = y_values[train_index], y_values[test_index]
+			GPR = gpr.GPR()
+			GPR.train_single(X_train, y_train)
+			pred, errors = GPR.predict_single(X_test, retstd=True)
 			res = y_test - pred
 			model_errors = np.concatenate((model_errors, errors), axis=None)
 			resid = np.concatenate((resid, res), axis=None)
