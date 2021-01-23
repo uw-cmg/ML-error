@@ -229,8 +229,8 @@ class MakePlot:
         ax.set_ylabel('relative counts')
         ax.hist(residuals/model_errors, bins=30, color='blue', edgecolor='black', density=True)
         ax.plot(gaussian_x, stats.norm.pdf(gaussian_x, 0, 1), label='Gaussian mu: 0 std: 1', color='orange')
-        ax.text(0.05, 0.9, 'mean = %f' % (np.mean(residuals / model_errors)), transform=ax.transAxes)
-        ax.text(0.05, 0.85, 'std = %f' % (np.std(residuals / model_errors)), transform=ax.transAxes)
+        ax.text(0.05, 0.9, 'mean = %.3f' % (np.mean(residuals / model_errors)), transform=ax.transAxes)
+        ax.text(0.05, 0.85, 'std = %.3f' % (np.std(residuals / model_errors)), transform=ax.transAxes)
         if save is False:
             plt.show()
         elif save is True:
@@ -331,10 +331,10 @@ class MakePlot:
         ax.plot(x, x, color='red', label='identity function')
         #ax.set_title('Binned RvE Plot -- {}'.format(title))
         ax.set_xlabel('model error estimates / standard deviation')
-        ax.set_ylabel('residuals / standard deviation')
+        ax.set_ylabel('RMS residuals / standard deviation')
         ax.plot(binned_model_errors, RMS_abs_res, 'o', color='blue')
         ax.plot(xfit, yfit, color='blue', label='fitted line')
-        ax.text(0.04, 0.92, 'r^2 = %.3f' % (r_squared), transform=ax.transAxes)
+        ax.text(0.04, 0.92, '$R^2$ = %.3f' % (r_squared), transform=ax.transAxes)
         ax.text(0.04, 0.85, 'slope = %.3f' % (slope), transform=ax.transAxes)
         ax.text(0.04, 0.78, 'y-intercept = %.3f' % (intercept), transform=ax.transAxes)
         ax.legend(loc="lower right")
@@ -345,7 +345,6 @@ class MakePlot:
         ax.set_xticks([])
         #ax_set_xticklabels([])
         ax.set_ylabel('bin counts')
-        ax.set_xlim([0.05, 0.8])
         ax.hist(model_errors, bins=number_of_bins, color='blue', edgecolor='black')
 
         if save is False:
