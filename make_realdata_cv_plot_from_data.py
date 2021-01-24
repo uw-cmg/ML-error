@@ -2,8 +2,8 @@ import matplotlib
 from package import MakePlot as mp
 import numpy as np
 
-models = ["GPR_Bayesian", "RF", "LR"]
-dataset = "Perovskite"
+models = ["GPR"]
+dataset = "Diffusion"
 save_plot = True
 
 for model in models:
