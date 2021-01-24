@@ -83,7 +83,7 @@ for model in models:
 
 
         # Load test data
-        X_test = np.load('friedman_500_data/test_x_values_{}_noise.npy'.format(noise_scale))
+        X_test = np.load('friedman_500_data/test_x_values_hypercube.npy'.format(noise_scale))
         y_test = np.load('friedman_500_data/test_y_values_{}_noise.npy'.format(noise_scale))
 
         # Get test data residuals and model errors
