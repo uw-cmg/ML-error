@@ -536,8 +536,8 @@ class MakePlot:
         #ax.text(0.04, 0.85, 'slope = %.3f' % (slope), transform=ax.transAxes)
         #ax.text(0.04, 0.78, 'y-intercept = %.3f' % (intercept), transform=ax.transAxes)
         # scaled stuff
-        ax.plot(scaled_binned_model_errors, scaled_RMS_abs_res, 'o', color='blue')
-        ax.plot(scaled_xfit, scaled_yfit, color='blue', label='fitted line (calibrated)')
+        ax.plot(scaled_binned_model_errors, scaled_RMS_abs_res, 'o', color='blue', alpha=0.5)
+        ax.plot(scaled_xfit, scaled_yfit, color='blue', label='fitted line (calibrated)', alpha=0.5)
         #ax.text(0.04, 0.92, '$R^2$ = %.3f' % (r_squared), transform=ax.transAxes)
         #ax.text(0.04, 0.85, 'slope = %.3f' % (slope), transform=ax.transAxes)
         #ax.text(0.04, 0.78, 'y-intercept = %.3f' % (intercept), transform=ax.transAxes)

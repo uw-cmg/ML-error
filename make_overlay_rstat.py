@@ -1,7 +1,7 @@
 from package import MakePlot as mp
 import numpy as np
 
-models = ["LR"]
+models = ["RF"]
 save_plot = False
 
 for model in models:

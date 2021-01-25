@@ -30,11 +30,3 @@ for dataset in datasets:
 
         np.save('ML-error/data_for_paper_plots/{}/{}/Convergence/a_nll.npy'.format(dataset, model), np.asarray(a_nll))
         np.save('ML-error/data_for_paper_plots/{}/{}/Convergence/b_nll.npy'.format(dataset, model), np.asarray(b_nll))
-
-        # Create and save plots
-        MP = mp.MakePlot()
-
-        MP.make_convergence_plot(a_nll, "{}, {}, NLL Optimization".format(model, dataset), "a (slope)", save=True,
-                                 file_name='ML-error/Supplemental_Info/{}/5-fold/{}/Convergence_Plots/a_nll'.format(dataset, model))
-        MP.make_convergence_plot(b_nll, "{}, {}, NLL Optimization", "b (intercept)".format(model, dataset), save=True,
-                                 file_name='ML-error/Supplemental_Info/{}/5-fold/{}/Convergence_Plots/b_nll'.format(dataset, model))

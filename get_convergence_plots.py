@@ -1,8 +1,9 @@
 import numpy as np
 from package import MakePlot as mp
 
-datasets = ["Diffusion", "Friedman_500", "Perovskite"]
-models = ["LR", "RF"]
+datasets = ["Friedman_500", "Diffusion", "Perovskite"]
+models = ["RF", "LR"]
+saveplot = True
 
 for dataset in datasets:
     for model in models:
@@ -13,7 +14,7 @@ for dataset in datasets:
         # Create and save plots
         MP = mp.MakePlot()
 
-        MP.make_convergence_plot(a_nll, "{}, {}, NLL Optimization".format(model, dataset), "a (slope)", save=True,
+        MP.make_convergence_plot(a_nll, "{}, {}, NLL Optimization".format(model, dataset), "a (slope)", save=saveplot,
                                  file_name='Supplemental_Info/{}/5-fold/{}/Convergence_Plots/a_nll'.format(dataset, model))
-        MP.make_convergence_plot(b_nll, "{}, {}, NLL Optimization".format(model, dataset), "b (intercept)", save=True,
+        MP.make_convergence_plot(b_nll, "{}, {}, NLL Optimization".format(model, dataset), "b (intercept)", save=saveplot,
                                  file_name='Supplemental_Info/{}/5-fold/{}/Convergence_Plots/b_nll'.format(dataset, model))
