@@ -1,7 +1,9 @@
 import numpy as np
 from package import MakePlot as mp
 
+# specify datasets to run -- choices = ["Diffusion", "Friedman_500", "Perovskite"]
 datasets = ["Friedman_500", "Diffusion", "Perovskite"]
+# specify models to run -- choices = ["RF", "LR", "GPR"]
 models = ["RF", "LR"]
 saveplot = True
 

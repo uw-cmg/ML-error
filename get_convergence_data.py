@@ -2,8 +2,9 @@ from package import ConvergenceData as cd
 from package import MakePlot as mp
 import numpy as np
 
-
+# specify datasets to run -- choices = ["Diffusion", "Friedman_500", "Perovskite"]
 datasets = ["Diffusion", "Friedman_500", "Perovskite"]
+# specify models to run -- choices = ["RF", "LR", "GPR"]
 models = ["LR", "RF"]
 
 for dataset in datasets:
@@ -30,11 +31,3 @@ for dataset in datasets:
 
         np.save('data_for_paper_plots/{}/{}/Convergence/a_nll.npy'.format(dataset, model), np.asarray(a_nll))
         np.save('data_for_paper_plots/{}/{}/Convergence/b_nll.npy'.format(dataset, model), np.asarray(b_nll))
-
-        # Create and save plots
-        MP = mp.MakePlot()
-
-        MP.make_convergence_plot(a_nll, "{}, {}, NLL Optimization".format(model, dataset), "a (slope)", save=True,
-                                 file_name='Supplemental_Info/{}/5-fold/{}/Convergence_Plots/a_nll'.format(dataset, model))
-        MP.make_convergence_plot(b_nll, "{}, {}, NLL Optimization", "b (intercept)".format(model, dataset), save=True,
-                                 file_name='Supplemental_Info/{}/5-fold/{}/Convergence_Plots/b_nll'.format(dataset, model))

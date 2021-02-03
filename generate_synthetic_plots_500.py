@@ -11,12 +11,12 @@ models = ["RF", "LR"]
 for model in models:
     print("STARTING {} Friedman 500".format(model))
     # Path to save files
-    path = 'ML-error/Supplemental_Info/Friedman_500/5-Fold/{}'.format(model)
+    path = 'Supplemental_Info/Friedman_500/5-Fold/{}'.format(model)
     #path = 'plots/'
 
     # Load data
-    X_train = np.load('ML-error/friedman_500_data/training_x_values.npy')
-    y_train = np.load('ML-error/friedman_500_data/training_y_values.npy')
+    X_train = np.load('friedman_500_data/training_x_values.npy')
+    y_train = np.load('friedman_500_data/training_y_values.npy')
 
     # Get CV residuals and model errors
     CVD = cvd.CVData()
@@ -42,10 +42,10 @@ for model in models:
     #b = b / stdev
 
     # Save np arrays of unscaled and scaled CV data
-    np.save('ML-error/data_for_paper_plots/Friedman_500/{}/CV/a'.format(model), np.asarray([a]))
-    np.save('ML-error/data_for_paper_plots/Friedman_500/{}/CV/b'.format(model), np.asarray([b]))
-    np.save('ML-error/data_for_paper_plots/Friedman_500/{}/CV/CV_residuals'.format(model), CV_residuals)
-    np.save('ML-error/data_for_paper_plots/Friedman_500/{}/CV/CV_model_errors'.format(model), CV_model_errors)
+    np.save('data_for_paper_plots/Friedman_500/{}/CV/a'.format(model), np.asarray([a]))
+    np.save('data_for_paper_plots/Friedman_500/{}/CV/b'.format(model), np.asarray([b]))
+    np.save('data_for_paper_plots/Friedman_500/{}/CV/CV_residuals'.format(model), CV_residuals)
+    np.save('data_for_paper_plots/Friedman_500/{}/CV/CV_model_errors'.format(model), CV_model_errors)
 
 
     # Make scaled and unscaled CV plots
@@ -70,8 +70,8 @@ for model in models:
                 file_name=path + '/CV_Plots/scaled_rstat.png')
 
     # Load test data
-    X_test = np.load('ML-error/friedman_500_data/test_x_values_hypercube.npy')
-    y_test = np.load('ML-error/friedman_500_data/test_y_values_hypercube.npy')
+    X_test = np.load('friedman_500_data/test_x_values_hypercube.npy')
+    y_test = np.load('friedman_500_data/test_y_values_hypercube.npy')
 
     # Get test data residuals and model errors
     TD = td.TestData()
@@ -82,10 +82,10 @@ for model in models:
     Test_model_errors = Test_model_errors / stdev
 
     # Save np arrays of unscaled and scaled Test data
-    np.save('ML-error/data_for_paper_plots/Friedman_500/{}/Test/a'.format(model), np.asarray([a]))
-    np.save('ML-error/data_for_paper_plots/Friedman_500/{}/Test/b'.format(model), np.asarray([b]))
-    np.save('ML-error/data_for_paper_plots/Friedman_500/{}/Test/Test_residuals'.format(model), Test_residuals)
-    np.save('ML-error/data_for_paper_plots/Friedman_500/{}/Test/Test_model_errors'.format(model), Test_model_errors)
+    np.save('data_for_paper_plots/Friedman_500/{}/Test/a'.format(model), np.asarray([a]))
+    np.save('data_for_paper_plots/Friedman_500/{}/Test/b'.format(model), np.asarray([b]))
+    np.save('data_for_paper_plots/Friedman_500/{}/Test/Test_residuals'.format(model), Test_residuals)
+    np.save('data_for_paper_plots/Friedman_500/{}/Test/Test_model_errors'.format(model), Test_model_errors)
 
     # Make scaled and unscaled test data plots
     MP.make_rve(Test_residuals, Test_model_errors, "{}, Friedman 500, Unscaled, Test Set".format(model), save=True,

@@ -16,7 +16,19 @@ for model in models:
 
     MP = mp.MakePlot()
 
-    MP.make_rstat(residuals, unscaled_model_errors, "{}, {}, Unscaled, Single CV Split".format(model, dataset), save=save_plot, file_name='Supplemental_Info/{}/5-Fold/{}/CV_Plots/unscaled_rstat.png'.format(dataset, model))
-    MP.make_rstat(residuals, scaled_model_errors, "{}, {}, Scaled, Single CV Split".format(model, dataset), save=save_plot, file_name='Supplemental_Info/{}/5-Fold/{}/CV_Plots/scaled_rstat.png'.format(dataset, model))
-    MP.make_rve_with_bin_counts_and_slope_1_line(residuals, unscaled_model_errors, "{}, {}, Unscaled, Single CV Split".format(model, dataset), save=save_plot, file_name='Supplemental_Info/{}/5-Fold/{}/CV_Plots/unscaled_RvE_with_counts.png'.format(dataset, model))
-    MP.make_rve_with_bin_counts_and_slope_1_line(residuals, scaled_model_errors, "{}, {}, Scaled, Single CV Split".format(model, dataset), save=save_plot, file_name='Supplemental_Info/{}/5-Fold/{}/CV_Plots/scaled_RvE_with_counts.png'.format(dataset, model))
+    # old plots:
+    #MP.make_rstat(residuals, unscaled_model_errors, "{}, {}, Unscaled, Single CV Split".format(model, dataset), save=save_plot, file_name='Supplemental_Info/{}/5-Fold/{}/CV_Plots/unscaled_rstat.png'.format(dataset, model))
+    #MP.make_rstat(residuals, scaled_model_errors, "{}, {}, Scaled, Single CV Split".format(model, dataset), save=save_plot, file_name='Supplemental_Info/{}/5-Fold/{}/CV_Plots/scaled_rstat.png'.format(dataset, model))
+    #MP.make_rve_with_bin_counts_and_slope_1_line(residuals, unscaled_model_errors, "{}, {}, Unscaled, Single CV Split".format(model, dataset), save=save_plot, file_name='Supplemental_Info/{}/5-Fold/{}/CV_Plots/unscaled_RvE_with_counts.png'.format(dataset, model))
+    #MP.make_rve_with_bin_counts_and_slope_1_line(residuals, scaled_model_errors, "{}, {}, Scaled, Single CV Split".format(model, dataset), save=save_plot, file_name='Supplemental_Info/{}/5-Fold/{}/CV_Plots/scaled_RvE_with_counts.png'.format(dataset, model))
+
+    # overlay plots:
+    MP.make_rstat_overlay(residuals, unscaled_model_errors, scaled_model_errors, "{}, {}, Single CV Split".format(model, dataset),
+                          save=save_plot,
+                          file_name='Supplemental_Info/{}/5-Fold/{}/CV_Plots/rstat_overlay.png'.format(
+                              dataset, model))
+
+    MP.make_rve_overlay(residuals, unscaled_model_errors, scaled_model_errors, "{}, {}, Single CV Split".format(model, dataset),
+                        save=save_plot,
+                        file_name='Supplemental_Info/{}/5-Fold/{}/CV_Plots/RvE_overlay.png'.format(
+                            dataset, model))
