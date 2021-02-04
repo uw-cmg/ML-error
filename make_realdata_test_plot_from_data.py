@@ -2,8 +2,8 @@ import matplotlib
 from package import MakePlot as mp
 import numpy as np
 
-models = ["GPR"]
-dataset = "Diffusion"
+models = ["LR", "RF", "GPR_Bayesian"]
+dataset = "Perovskite"
 save_plot = True
 
 for model in models:
@@ -31,4 +31,14 @@ for model in models:
     MP.make_rve_overlay(residuals, unscaled_model_errors, scaled_model_errors, "{}, {}".format(model, dataset),
                         save=save_plot,
                         file_name='Supplemental_Info/{}/5-Fold/{}/Test_Plots/RvE_overlay.png'.format(
+                            dataset, model))
+
+    MP.make_rstat_overlay_with_table(residuals, unscaled_model_errors, scaled_model_errors, "{}, {}".format(model, dataset),
+                          save=save_plot,
+                          file_name='Supplemental_Info/{}/5-Fold/{}/Test_Plots/rstat_overlay_table.png'.format(
+                              dataset, model))
+
+    MP.make_rve_overlay_with_table(residuals, unscaled_model_errors, scaled_model_errors, "{}, {}".format(model, dataset),
+                        save=save_plot,
+                        file_name='Supplemental_Info/{}/5-Fold/{}/Test_Plots/RvE_overlay_with_table.png'.format(
                             dataset, model))

@@ -530,13 +530,41 @@ class MakePlot:
         ax.set_xlabel('uncertainty estimates')
         ax.set_ylabel('RMS residuals')
         # unscaled stuff
-        ax.plot(unscaled_binned_model_errors, unscaled_RMS_abs_res, 'o', color='grey', alpha=0.5)
+        # separate well-sampled data (> 30 points) from poorly-sampled data
+        unscaled_binned_model_errors_under30 = []
+        unscaled_binned_model_errors_over30 = []
+        unscaled_RMS_abs_res_under30 = []
+        unscaled_RMS_abs_res_over30 = []
+        for i in range(0, len(unscaled_binned_model_errors)):
+            if unscaled_weights[i] > 30:
+                unscaled_binned_model_errors_over30.append(unscaled_binned_model_errors[i])
+                unscaled_RMS_abs_res_over30.append(unscaled_RMS_abs_res[i])
+            else:
+                unscaled_binned_model_errors_under30.append(unscaled_binned_model_errors[i])
+                unscaled_RMS_abs_res_under30.append(unscaled_RMS_abs_res[i])
+        #ax.plot(unscaled_binned_model_errors, unscaled_RMS_abs_res, 'o', color='grey', alpha=0.5)
+        ax.plot(unscaled_binned_model_errors_over30, unscaled_RMS_abs_res_over30, 'o', mec='grey', mfc='grey', alpha=0.5)
+        ax.plot(unscaled_binned_model_errors_under30, unscaled_RMS_abs_res_under30, 'o', mec='grey', mfc='none', alpha=0.5)
         ax.plot(unscaled_xfit, unscaled_yfit, color='grey', label='fitted line (uncalibrated)', alpha=0.5)
         #ax.text(0.04, 0.92, '$R^2$ = %.3f' % (r_squared), transform=ax.transAxes)
         #ax.text(0.04, 0.85, 'slope = %.3f' % (slope), transform=ax.transAxes)
         #ax.text(0.04, 0.78, 'y-intercept = %.3f' % (intercept), transform=ax.transAxes)
         # scaled stuff
-        ax.plot(scaled_binned_model_errors, scaled_RMS_abs_res, 'o', color='blue', alpha=0.5)
+        # separate well-sampled data (> 30 points) from poorly-sampled data
+        scaled_binned_model_errors_under30 = []
+        scaled_binned_model_errors_over30 = []
+        scaled_RMS_abs_res_under30 = []
+        scaled_RMS_abs_res_over30 = []
+        for i in range(0, len(scaled_binned_model_errors)):
+            if scaled_weights[i] > 30:
+                scaled_binned_model_errors_over30.append(scaled_binned_model_errors[i])
+                scaled_RMS_abs_res_over30.append(scaled_RMS_abs_res[i])
+            else:
+                scaled_binned_model_errors_under30.append(scaled_binned_model_errors[i])
+                scaled_RMS_abs_res_under30.append(scaled_RMS_abs_res[i])
+        #ax.plot(scaled_binned_model_errors, scaled_RMS_abs_res, 'o', color='blue', alpha=0.5)
+        ax.plot(scaled_binned_model_errors_over30, scaled_RMS_abs_res_over30, 'o', mec='blue', mfc='blue', alpha=0.75)
+        ax.plot(scaled_binned_model_errors_under30, scaled_RMS_abs_res_under30, 'o', mec='blue', mfc='none', alpha=0.75)
         ax.plot(scaled_xfit, scaled_yfit, color='blue', label='fitted line (calibrated)', alpha=0.5)
         #ax.text(0.04, 0.92, '$R^2$ = %.3f' % (r_squared), transform=ax.transAxes)
         #ax.text(0.04, 0.85, 'slope = %.3f' % (slope), transform=ax.transAxes)
