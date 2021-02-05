@@ -5,10 +5,10 @@ from package import MakePlot as mp
 from package import TestData as td
 from sklearn.model_selection import train_test_split
 
-# Data set used
+# Data set used -- options = "Perovskite", "Diffusion"
 datasets = ["Perovskite"]
 
-# Models used
+# Models used -- options = "RF", "GPR", "LR", "GPR_Bayesian"
 models = ["GPR"]
 
 for dataset in datasets:

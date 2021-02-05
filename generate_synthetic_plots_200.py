@@ -5,7 +5,7 @@ from package import MakePlot as mp
 from package import TestData as td
 
 # Specify what models to run
-# Options: "RF", "GPR", "BT", "LR"
+# Options: "RF", "GPR", "LR"
 models = ["RF", "LR"]
 
 for model in models:
