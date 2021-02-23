@@ -2,7 +2,7 @@ import matplotlib
 from package import MakePlot as mp
 import numpy as np
 
-models = ["RF_0.1_noise", "RF_0.5_noise", "RF_1.0_noise", "RF_2.0_noise", "RF", "LR", "GPR", "GPR_Bayesian"]
+models = ["RF"]
 save_plot = True
 
 for model in models:
@@ -24,22 +24,22 @@ for model in models:
     # overlay plots
     MP.make_rstat_overlay(residuals, unscaled_model_errors, scaled_model_errors,
                                      "{}, Friedman 500".format(model), save=save_plot,
-                                     file_name='Supplemental_Info/Friedman_500/5-Fold/{}/Test_Plots/rstat_overlay.png'.format(
+                                     file_name='SI/Friedman_500/{}/Test/rstat.png'.format(
                                          model))
 
     MP.make_rve_overlay(residuals, unscaled_model_errors, scaled_model_errors,
                                    "{}, Friedman 500".format(model),
                                    save=save_plot,
-                                   file_name='Supplemental_Info/Friedman_500/5-Fold/{}/Test_Plots/RvE_overlay.png'.format(
+                                   file_name='SI/Friedman_500/{}/Test/RvE.png'.format(
                                        model))
 
-    MP.make_rstat_overlay_with_table(residuals, unscaled_model_errors, scaled_model_errors,
-                          "{}, Friedman 500".format(model), save=save_plot,
-                          file_name='Supplemental_Info/Friedman_500/5-Fold/{}/Test_Plots/rstat_overlay_table.png'.format(
-                              model))
+    #MP.make_rstat_overlay_with_table(residuals, unscaled_model_errors, scaled_model_errors,
+    #                      "{}, Friedman 500".format(model), save=save_plot,
+    #                      file_name='Supplemental_Info/Friedman_500/5-Fold/{}/Test_Plots/rstat_overlay_table.png'.format(
+    #                          model))
 
-    MP.make_rve_overlay_with_table(residuals, unscaled_model_errors, scaled_model_errors,
-                        "{}, Friedman 500".format(model),
-                        save=save_plot,
-                        file_name='Supplemental_Info/Friedman_500/5-Fold/{}/Test_Plots/RvE_overlay_table.png'.format(
-                            model))
+    #MP.make_rve_overlay_with_table(residuals, unscaled_model_errors, scaled_model_errors,
+    #                    "{}, Friedman 500".format(model),
+    #                    save=save_plot,
+    #                    file_name='Supplemental_Info/Friedman_500/5-Fold/{}/Test_Plots/RvE_overlay_table.png'.format(
+    #                        model))
