@@ -6,7 +6,7 @@ from package import TestData as td
 from sklearn.model_selection import train_test_split
 
 # Data set used
-datasets = ["Diffusion", "Perovskite"]
+datasets = ["Perovskite"]
 
 # Models used
 models = ["GPR_Bayesian"]

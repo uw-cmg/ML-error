@@ -3,8 +3,10 @@ from package import io
 import numpy as np
 
 # import data
-data = io.importdata('perovskite_data/PVstability_Weipaper_alldata_featureselected.csv')
-data = io.sanitizedata(data, user_list=['is_testdata', 'Material Composition'])
+#data = io.importdata('perovskite_data/PVstability_Weipaper_alldata_featureselected.csv')
+#data = io.sanitizedata(data, user_list=['is_testdata', 'Material Composition'])
+data = io.importdata('perovskite_data/Perovskite_stability_Wei_updated_forGlenn.csv')
+data = io.sanitizedata(data, user_list=['Compositions'])
 
 # separate x- and y-values and save as numpy arrays
 X_values = data.iloc[:, 1:]

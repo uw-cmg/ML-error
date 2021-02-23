@@ -3,7 +3,7 @@ from package import MakePlot as mp
 import numpy as np
 
 # specify datasets to run -- choices = ["Diffusion", "Friedman_500", "Perovskite"]
-datasets = ["Diffusion", "Friedman_500", "Perovskite"]
+datasets = ["Perovskite"]
 # specify models to run -- choices = ["RF", "LR", "GPR"]
 models = ["LR", "RF"]
 

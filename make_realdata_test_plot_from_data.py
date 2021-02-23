@@ -2,7 +2,7 @@ import matplotlib
 from package import MakePlot as mp
 import numpy as np
 
-models = ["LR", "RF", "GPR_Bayesian"]
+models = ["GPR_Bayesian"]
 dataset = "Perovskite"
 save_plot = True
 
