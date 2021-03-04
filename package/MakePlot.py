@@ -594,6 +594,32 @@ class MakePlot:
             else:
                 plt.savefig(file_name, dpi=300)
         plt.close(fig)
+
+        ########################## Print out stats for lines fit to all and then just well-sampled data ########################
+
+        # Fit a line to just the well-sampled calibrated data
+        scaled_model_over30 = LinearRegression(fit_intercept=True)
+        scaled_model_over30.fit(np.asarray(scaled_binned_model_errors_over30).reshape(-1,1), np.asarray(scaled_RMS_abs_res_over30))  #### SELF: Can indicate subset of points to fit to using ":" --> "a:b"
+        scaled_xfit_over30 = np.asarray(scaled_binned_model_errors_over30).reshape(-1,1)
+        scaled_yfit_over30 = scaled_model_over30.predict(scaled_xfit_over30)
+
+        # Calculate r^2 value
+        scaled_r_squared_over30 = r2_score(scaled_RMS_abs_res_over30, scaled_yfit_over30)
+        # Calculate slope
+        scaled_slope_over30 = scaled_model_over30.coef_
+        # Calculate y-intercept
+        scaled_intercept_over30 = scaled_model_over30.intercept_
+
+        print("Calibrated fit lines values:")
+        print("Line fit to all points (weighted by bin counts):")
+        print("slope = {}".format(scaled_slope))
+        print("y-intercept = {}".format(scaled_intercept))
+        print("r^2 = {}".format(scaled_r_squared))
+        print("Line fit to only well-sampled points (not weighted by bin counts):")
+        print("slope = {}".format(scaled_slope_over30))
+        print("y-intercept = {}".format(scaled_intercept_over30))
+        print("r^2 = {}".format(scaled_r_squared_over30))
+
         return unscaled_model_errors, abs_res, unscaled_r_squared, unscaled_slope, unscaled_intercept, unscaled_binned_model_errors, unscaled_RMS_abs_res, unscaled_xfit, unscaled_yfit, scaled_model_errors, abs_res, scaled_r_squared, scaled_slope, scaled_intercept, scaled_binned_model_errors, scaled_RMS_abs_res, scaled_xfit, scaled_yfit
 
     def make_rstat_overlay_with_table(self, residuals, unscaled_model_errors, scaled_model_errors, title, save=False, file_name=None):

@@ -2,9 +2,9 @@ import matplotlib
 from package import MakePlot as mp
 import numpy as np
 
-models = ["GPR_Bayesian"]
-dataset = "Perovskite"
-save_plot = True
+models = ["LR"]
+dataset = "Diffusion"
+save_plot = False
 
 for model in models:
     unscaled_model_errors = np.load('data_for_paper_plots/{}/{}/Test/Test_model_errors_unscaled.npy'.format(dataset, model))
