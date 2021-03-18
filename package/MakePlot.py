@@ -555,13 +555,17 @@ class MakePlot:
         scaled_binned_model_errors_over30 = []
         scaled_RMS_abs_res_under30 = []
         scaled_RMS_abs_res_over30 = []
+        bin_counts_under_30 = []
+        bin_counts_over_30 = []
         for i in range(0, len(scaled_binned_model_errors)):
             if scaled_weights[i] > 30:
                 scaled_binned_model_errors_over30.append(scaled_binned_model_errors[i])
                 scaled_RMS_abs_res_over30.append(scaled_RMS_abs_res[i])
+                bin_counts_over_30.append(scaled_weights[i])
             else:
                 scaled_binned_model_errors_under30.append(scaled_binned_model_errors[i])
                 scaled_RMS_abs_res_under30.append(scaled_RMS_abs_res[i])
+                bin_counts_under_30.append(scaled_weights[i])
         #ax.plot(scaled_binned_model_errors, scaled_RMS_abs_res, 'o', color='blue', alpha=0.5)
         ax.plot(scaled_binned_model_errors_over30, scaled_RMS_abs_res_over30, 'o', mec='blue', mfc='blue', alpha=0.75)
         ax.plot(scaled_binned_model_errors_under30, scaled_RMS_abs_res_under30, 'o', mec='blue', mfc='none', alpha=0.75)
@@ -599,12 +603,12 @@ class MakePlot:
 
         # Fit a line to just the well-sampled calibrated data
         scaled_model_over30 = LinearRegression(fit_intercept=True)
-        scaled_model_over30.fit(np.asarray(scaled_binned_model_errors_over30).reshape(-1,1), np.asarray(scaled_RMS_abs_res_over30))  #### SELF: Can indicate subset of points to fit to using ":" --> "a:b"
+        scaled_model_over30.fit(np.asarray(scaled_binned_model_errors_over30).reshape(-1,1), np.asarray(scaled_RMS_abs_res_over30), sample_weight=np.asarray(bin_counts_over_30))  #### SELF: Can indicate subset of points to fit to using ":" --> "a:b"
         scaled_xfit_over30 = np.asarray(scaled_binned_model_errors_over30).reshape(-1,1)
         scaled_yfit_over30 = scaled_model_over30.predict(scaled_xfit_over30)
 
         # Calculate r^2 value
-        scaled_r_squared_over30 = r2_score(scaled_RMS_abs_res_over30, scaled_yfit_over30)
+        scaled_r_squared_over30 = r2_score(scaled_RMS_abs_res_over30, scaled_yfit_over30, sample_weight=np.asarray(bin_counts_over_30))
         # Calculate slope
         scaled_slope_over30 = scaled_model_over30.coef_
         # Calculate y-intercept
@@ -615,7 +619,7 @@ class MakePlot:
         print("slope = {}".format(scaled_slope))
         print("y-intercept = {}".format(scaled_intercept))
         print("r^2 = {}".format(scaled_r_squared))
-        print("Line fit to only well-sampled points (not weighted by bin counts):")
+        print("Line fit to only well-sampled points (weighted by bin counts):")
         print("slope = {}".format(scaled_slope_over30))
         print("y-intercept = {}".format(scaled_intercept_over30))
         print("r^2 = {}".format(scaled_r_squared_over30))
