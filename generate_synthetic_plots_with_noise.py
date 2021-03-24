@@ -8,7 +8,7 @@ from package import TestData as td
 # Options: "RF", "GPR", "BT", "LR"
 models = ["RF"]
 # Specify how much noise to add
-noise_scales = [0.1, 0.5, 1.0, 2.0]
+noise_scales = [0.2, 0.3, 0.4]
 
 for model in models:
     for noise_scale in noise_scales:

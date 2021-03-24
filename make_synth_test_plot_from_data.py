@@ -33,6 +33,7 @@ for model in models:
                                    file_name='SI/Friedman_500/{}/Test/RvE.png'.format(
                                        model))
 
+
     #MP.make_rstat_overlay_with_table(residuals, unscaled_model_errors, scaled_model_errors,
     #                      "{}, Friedman 500".format(model), save=save_plot,
     #                      file_name='Supplemental_Info/Friedman_500/5-Fold/{}/Test_Plots/rstat_overlay_table.png'.format(

@@ -3,7 +3,7 @@ import numpy as np
 # Define training data size
 training_num = 500
 # Define noise scale factor
-scale = 2.0
+scale = 0.4
 # Load friedman no-noise training set
 y_train = np.load('friedman_500_data/training_y_values.npy')
 # Load friedman no-noise test set
