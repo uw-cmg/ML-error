@@ -36,6 +36,11 @@ if model == "GPR":
 else:
     trees = 500
 
+# check that a valid model was input
+if model not in ["RF", "LR", "GPR", "GPR_Bayesian"]:
+    print("{} is not a valid model. Please choose from 'RF', 'LR', 'GPR', or 'GPR_Bayesian'.")
+    quit()
+
 # import data set
 if dataset == "Diffusion":
     X_train = np.load('diffusion_data/all_x_values.npy')
@@ -43,8 +48,10 @@ if dataset == "Diffusion":
 elif dataset == "Perovskite":
     X_train = np.load('perovskite_data/all_x_values.npy')
     y_train = np.load('perovskite_data/all_y_values.npy')
-    if model == "GPR":
+    if model == "GPR" and action == "plot":
         print("GPR was not run on Perovskite because of computational constraints.")
+        print("If you would like to see results for GPR with Perovskite, please change action from 'plot' to 'run'.")
+        print("(But keep in mind that it may take a long time, i.e. weeks, to run.)")
         quit()
 elif dataset == "Friedman":
     X_train = np.load('friedman_500_data/training_x_values.npy')
@@ -56,36 +63,64 @@ elif dataset == "Friedman_0.1_Noise":
     y_train = np.load('friedman_500_data/training_y_values_0.1_noise.npy')
     X_test = np.load('friedman_500_data/test_x_values_hypercube.npy')
     y_test = np.load('friedman_500_data/test_y_values_0.1_noise.npy')
+    if model != "RF" and action == "plot":
+        print("Noisy data was only run using the RF model for our paper.")
+        print("If you would like to see results for the {} model, please change action from 'plot' to 'run'.".format(model))
+        quit()
 elif dataset == "Friedman_0.2_Noise":
     X_train = np.load('friedman_500_data/training_x_values.npy')
     y_train = np.load('friedman_500_data/training_y_values_0.2_noise.npy')
     X_test = np.load('friedman_500_data/test_x_values_hypercube.npy')
     y_test = np.load('friedman_500_data/test_y_values_0.2_noise.npy')
+    if model != "RF" and action == "plot":
+        print("Noisy data was only run using the RF model for our paper.")
+        print("If you would like to see results for the {} model, please change action from 'plot' to 'run'.".format(model))
+        quit()
 elif dataset == "Friedman_0.3_Noise":
     X_train = np.load('friedman_500_data/training_x_values.npy')
     y_train = np.load('friedman_500_data/training_y_values_0.3_noise.npy')
     X_test = np.load('friedman_500_data/test_x_values_hypercube.npy')
     y_test = np.load('friedman_500_data/test_y_values_0.3_noise.npy')
+    if model != "RF" and action == "plot":
+        print("Noisy data was only run using the RF model for our paper.")
+        print("If you would like to see results for the {} model, please change action from 'plot' to 'run'.".format(model))
+        quit()
 elif dataset == "Friedman_0.4_Noise":
     X_train = np.load('friedman_500_data/training_x_values.npy')
     y_train = np.load('friedman_500_data/training_y_values_0.4_noise.npy')
     X_test = np.load('friedman_500_data/test_x_values_hypercube.npy')
     y_test = np.load('friedman_500_data/test_y_values_0.4_noise.npy')
+    if model != "RF" and action == "plot":
+        print("Noisy data was only run using the RF model for our paper.")
+        print("If you would like to see results for the {} model, please change action from 'plot' to 'run'.".format(model))
+        quit()
 elif dataset == "Friedman_0.5_Noise":
     X_train = np.load('friedman_500_data/training_x_values.npy')
     y_train = np.load('friedman_500_data/training_y_values_0.5_noise.npy')
     X_test = np.load('friedman_500_data/test_x_values_hypercube.npy')
     y_test = np.load('friedman_500_data/test_y_values_0.5_noise.npy')
+    if model != "RF" and action == "plot":
+        print("Noisy data was only run using the RF model for our paper.")
+        print("If you would like to see results for the {} model, please change action from 'plot' to 'run'.".format(model))
+        quit()
 elif dataset == "Friedman_1.0_Noise":
     X_train = np.load('friedman_500_data/training_x_values.npy')
     y_train = np.load('friedman_500_data/training_y_values_1.0_noise.npy')
     X_test = np.load('friedman_500_data/test_x_values_hypercube.npy')
     y_test = np.load('friedman_500_data/test_y_values_1.0_noise.npy')
+    if model != "RF" and action == "plot":
+        print("Noisy data was only run using the RF model for our paper.")
+        print("If you would like to see results for the {} model, please change action from 'plot' to 'run'.".format(model))
+        quit()
 elif dataset == "Friedman_2.0_Noise":
     X_train = np.load('friedman_500_data/training_x_values.npy')
     y_train = np.load('friedman_500_data/training_y_values_2.0_noise.npy')
     X_test = np.load('friedman_500_data/test_x_values_hypercube.npy')
     y_test = np.load('friedman_500_data/test_y_values_2.0_noise.npy')
+    if model != "RF" and action == "plot":
+        print("Noisy data was only run using the RF model for our paper.")
+        print("If you would like to see results for the {} model, please change action from 'plot' to 'run'.".format(model))
+        quit()
 else:
     X_train, y_train, X_test, y_test = None, None, None, None
     print("Invalid dataset provided.")
@@ -124,7 +159,7 @@ def save_syntheticdata(a, b, residuals, unscaled_model_errors, scaled_model_erro
 
     combined = np.asarray(combined)
 
-    calibration = np.asarray([np.asarray([a[0], b[0]])])
+    calibration = np.asarray([np.asarray([a, b])])
 
     np.savetxt("{}/residuals_and_uncertainty_estimates.csv".format(path), combined,
                header="residual, uncalibrated_uncertainty_estimate, calibrated_uncertainty_estimate",
@@ -145,8 +180,8 @@ if action == "run":
             dataset, model, X_train, y_train, model_num=trees)
 
         print("Summary:")
-        print("a = %d +/- %d", np.mean(a_array), np.std(a_array))
-        print("b = %d +/- %d", np.mean(a_array), np.std(a_array))
+        print("a = %.3f +/- %.3f" % (np.mean(a_array), np.std(a_array)))
+        print("b = %.3f +/- %.3f" % (np.mean(a_array), np.std(a_array)))
 
         # save data
         save_realdata(a_array, b_array, Test_residuals, Test_model_errors_unscaled, Test_model_errors_scaled)
@@ -164,7 +199,7 @@ if action == "run":
                             save=save_plot,
                             file_name='{}/RvE.png'.format(path))
 
-    elif dataset == "Friedman":
+    else:
         print("Starting run for {} on {} data.".format(model, dataset))
         # Get CV residuals and model errors
         CVD = cvd.CVData()
@@ -217,6 +252,10 @@ if action == "plot":
         a = np.load('data_for_paper_plots/{}/{}/Test/a.npy'.format(dataset, model))
         b = np.load('data_for_paper_plots/{}/{}/Test/b.npy'.format(dataset, model))
 
+        print("Calibration factors:")
+        print("a = %.3f +/- %.3f" % (np.mean(a), np.std(a)))
+        print("b = %.3f +/- %.3f" % (np.mean(b), np.std(b)))
+
         # save data
         save_realdata(a, b, residuals, unscaled_model_errors, scaled_model_errors)
 
@@ -238,13 +277,66 @@ if action == "plot":
             a = np.load('data_for_paper_plots/Friedman_500/{}/Test/a.npy'.format(model))
             b = np.load('data_for_paper_plots/Friedman_500/{}/Test/b.npy'.format(model))
             scaled_model_errors = unscaled_model_errors * a[0] + b[0]
+        elif dataset == "Friedman_0.1_Noise":
+            unscaled_model_errors = np.load(
+                'data_for_paper_plots/Friedman_500/RF_0.1_noise/Test/Test_model_errors.npy')
+            residuals = np.load('data_for_paper_plots/Friedman_500/RF_0.1_noise/Test/Test_residuals.npy')
+            a = np.load('data_for_paper_plots/Friedman_500/RF_0.1_noise/Test/a.npy')
+            b = np.load('data_for_paper_plots/Friedman_500/RF_0.1_noise/Test/b.npy')
+            scaled_model_errors = unscaled_model_errors * a[0] + b[0]
+        elif dataset == "Friedman_0.2_Noise":
+            unscaled_model_errors = np.load(
+                'data_for_paper_plots/Friedman_500/RF_0.2_noise/Test/Test_model_errors.npy')
+            residuals = np.load('data_for_paper_plots/Friedman_500/RF_0.2_noise/Test/Test_residuals.npy')
+            a = np.load('data_for_paper_plots/Friedman_500/RF_0.2_noise/Test/a.npy')
+            b = np.load('data_for_paper_plots/Friedman_500/RF_0.2_noise/Test/b.npy')
+            scaled_model_errors = unscaled_model_errors * a[0] + b[0]
+        elif dataset == "Friedman_0.3_Noise":
+            unscaled_model_errors = np.load(
+                'data_for_paper_plots/Friedman_500/RF_0.3_noise/Test/Test_model_errors.npy')
+            residuals = np.load('data_for_paper_plots/Friedman_500/RF_0.3_noise/Test/Test_residuals.npy')
+            a = np.load('data_for_paper_plots/Friedman_500/RF_0.3_noise/Test/a.npy')
+            b = np.load('data_for_paper_plots/Friedman_500/RF_0.3_noise/Test/b.npy')
+            scaled_model_errors = unscaled_model_errors * a[0] + b[0]
+        elif dataset == "Friedman_0.4_Noise":
+            unscaled_model_errors = np.load(
+                'data_for_paper_plots/Friedman_500/RF_0.4_noise/Test/Test_model_errors.npy')
+            residuals = np.load('data_for_paper_plots/Friedman_500/RF_0.4_noise/Test/Test_residuals.npy')
+            a = np.load('data_for_paper_plots/Friedman_500/RF_0.4_noise/Test/a.npy')
+            b = np.load('data_for_paper_plots/Friedman_500/RF_0.4_noise/Test/b.npy')
+            scaled_model_errors = unscaled_model_errors * a[0] + b[0]
+        elif dataset == "Friedman_0.5_Noise":
+            unscaled_model_errors = np.load(
+                'data_for_paper_plots/Friedman_500/RF_0.5_noise/Test/Test_model_errors.npy')
+            residuals = np.load('data_for_paper_plots/Friedman_500/RF_0.5_noise/Test/Test_residuals.npy')
+            a = np.load('data_for_paper_plots/Friedman_500/RF_0.5_noise/Test/a.npy')
+            b = np.load('data_for_paper_plots/Friedman_500/RF_0.5_noise/Test/b.npy')
+            scaled_model_errors = unscaled_model_errors * a[0] + b[0]
+        elif dataset == "Friedman_1.0_Noise":
+            unscaled_model_errors = np.load(
+                'data_for_paper_plots/Friedman_500/RF_1.0_noise/Test/Test_model_errors.npy')
+            residuals = np.load('data_for_paper_plots/Friedman_500/RF_1.0_noise/Test/Test_residuals.npy')
+            a = np.load('data_for_paper_plots/Friedman_500/RF_1.0_noise/Test/a.npy')
+            b = np.load('data_for_paper_plots/Friedman_500/RF_1.0_noise/Test/b.npy')
+            scaled_model_errors = unscaled_model_errors * a[0] + b[0]
+        elif dataset == "Friedman_2.0_Noise":
+            unscaled_model_errors = np.load(
+                'data_for_paper_plots/Friedman_500/RF_2.0_noise/Test/Test_model_errors.npy')
+            residuals = np.load('data_for_paper_plots/Friedman_500/RF_2.0_noise/Test/Test_residuals.npy')
+            a = np.load('data_for_paper_plots/Friedman_500/RF_2.0_noise/Test/a.npy')
+            b = np.load('data_for_paper_plots/Friedman_500/RF_2.0_noise/Test/b.npy')
+            scaled_model_errors = unscaled_model_errors * a[0] + b[0]
         else:
             a, b, residuals, unscaled_model_errors, scaled_model_errors = None, None, None, None, None
             print("No valid dataset provided.")
             quit()
 
+        print("Calibration factors:")
+        print("a = %.3f" % a[0])
+        print("b = %.3f" % b[0])
+
         # Save data
-        save_syntheticdata(a, b, residuals, unscaled_model_errors, scaled_model_errors)
+        save_syntheticdata(a[0], b[0], residuals, unscaled_model_errors, scaled_model_errors)
 
         # make plots
         MP = mp.MakePlot()
@@ -256,3 +348,4 @@ if action == "plot":
                             "{}, {}".format(model, dataset),
                             save=save_plot,
                             file_name='{}/RvE.png'.format(path))
+

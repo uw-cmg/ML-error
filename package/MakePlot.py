@@ -365,14 +365,14 @@ class MakePlot:
                 zero_indices.append(i)
         unscaled_residuals = np.delete(residuals, zero_indices)
         unscaled_model_errors = np.delete(unscaled_model_errors, zero_indices)
-        print("{} values deleted before making r-stat plot because unscaled model errors were zero.".format(len(zero_indices)))
+        #print("{} values deleted before making r-stat plot because unscaled model errors were zero.".format(len(zero_indices)))
         scaled_zero_indices = []
         for i in range(0, len(scaled_model_errors)):
             if scaled_model_errors[i] == 0:
                 scaled_zero_indices.append(i)
         scaled_residuals = np.delete(residuals, scaled_zero_indices)
         scaled_model_errors = np.delete(scaled_model_errors, scaled_zero_indices)
-        print("{} values deleted before making r-stat plot because scaled model errors were zero.".format(len(zero_indices)))
+        #print("{} values deleted before making r-stat plot because scaled model errors were zero.".format(len(zero_indices)))
         # make data for gaussian plot
         gaussian_x = np.linspace(-5, 5, 1000)
         # create plot
@@ -395,6 +395,11 @@ class MakePlot:
             else:
                 plt.savefig(file_name, dpi=300)
         plt.close(fig)
+        print("r-statistic:")
+        print("uncalibrated mean = %.3f" % (np.mean(unscaled_residuals / unscaled_model_errors)))
+        print("uncalibrated stdev = %.3f" % (np.std(unscaled_residuals / unscaled_model_errors)))
+        print("calibrated mean = %.3f" % (np.mean(scaled_residuals / scaled_model_errors)))
+        print("calibrated stdev = %.3f" % (np.std(scaled_residuals / scaled_model_errors)))
         return 0
 
     def make_rve_overlay(self, residuals, unscaled_model_errors, scaled_model_errors, title, save=False, file_name=None, number_of_bins=15):
@@ -614,15 +619,25 @@ class MakePlot:
         # Calculate y-intercept
         scaled_intercept_over30 = scaled_model_over30.intercept_
 
-        print("Calibrated fit lines values:")
-        print("Line fit to all points (weighted by bin counts):")
-        print("slope = {}".format(scaled_slope))
-        print("y-intercept = {}".format(scaled_intercept))
-        print("r^2 = {}".format(scaled_r_squared))
-        print("Line fit to only well-sampled points (weighted by bin counts):")
-        print("slope = {}".format(scaled_slope_over30))
-        print("y-intercept = {}".format(scaled_intercept_over30))
-        print("r^2 = {}".format(scaled_r_squared_over30))
+        #print("Calibrated fit lines values:")
+        #print("Line fit to all points (weighted by bin counts):")
+        #print("slope = {}".format(scaled_slope))
+        #print("y-intercept = {}".format(scaled_intercept))
+        #print("r^2 = {}".format(scaled_r_squared))
+        #print("Line fit to only well-sampled points (weighted by bin counts):")
+        #print("slope = {}".format(scaled_slope_over30))
+        #print("y-intercept = {}".format(scaled_intercept_over30))
+        #print("r^2 = {}".format(scaled_r_squared_over30))
+
+        print("RMS residual vs. uncertainty estimates:")
+        print("uncalibrated slope = %.3f" % unscaled_slope)
+        print("uncalibrated y-intercept = %.3f" % unscaled_intercept)
+        print("uncalibrated R^2 = %.3f" % unscaled_r_squared)
+        print("calibrated slope = %.3f" % scaled_slope)
+        print("calibrated y-intercept = %.3f" % scaled_intercept)
+        print("calibrated R^2 = %.3f" % scaled_r_squared)
+
+
 
         return unscaled_model_errors, abs_res, unscaled_r_squared, unscaled_slope, unscaled_intercept, unscaled_binned_model_errors, unscaled_RMS_abs_res, unscaled_xfit, unscaled_yfit, scaled_model_errors, abs_res, scaled_r_squared, scaled_slope, scaled_intercept, scaled_binned_model_errors, scaled_RMS_abs_res, scaled_xfit, scaled_yfit
 
