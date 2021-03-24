@@ -1,10 +1,10 @@
 import numpy as np
 
-noise_level = "0.1"
+noise_level = "0.2"
 
 # Load data
-X_train = np.load('friedman_500_data/test_x_values_hypercube.npy')
-y_train = np.load('friedman_500_data/test_y_values_{}_noise.npy'.format(noise_level))
+X_train = np.load('friedman_500_data/training_x_values.npy')
+y_train = np.load('friedman_500_data/training_y_values_{}_noise.npy'.format(noise_level))
 
 combined = []
 for i in range(0, len(X_train)):
@@ -17,4 +17,4 @@ print(X_train[1])
 print(X_train[1][1])
 print(y_train[1])
 
-np.savetxt("SI/Noisy_Friedman_500/{}_sigma/test.csv".format(noise_level), combined, header="x0, x1, x2, x3, x4, y", delimiter=",")
+np.savetxt("SI/Noisy_Friedman_500/{}_sigma/training.csv".format(noise_level), combined, header="x0, x1, x2, x3, x4, y", delimiter=",")
