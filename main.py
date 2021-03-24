@@ -43,41 +43,55 @@ if dataset == "Diffusion":
 elif dataset == "Perovskite":
     X_train = np.load('perovskite_data/all_x_values.npy')
     y_train = np.load('perovskite_data/all_y_values.npy')
+    if model == "GPR":
+        print("GPR was not run on Perovskite because of computational constraints.")
+        quit()
+elif dataset == "Friedman":
+    X_train = np.load('friedman_500_data/training_x_values.npy')
+    y_train = np.load('friedman_500_data/training_y_values.npy')
+    X_test = np.load('friedman_500_data/test_x_values_hypercube.npy')
+    y_test = np.load('friedman_500_data/test_y_values_hypercube.npy')
+elif dataset == "Friedman_0.1_Noise":
+    X_train = np.load('friedman_500_data/training_x_values.npy')
+    y_train = np.load('friedman_500_data/training_y_values_0.1_noise.npy')
+    X_test = np.load('friedman_500_data/test_x_values_hypercube.npy')
+    y_test = np.load('friedman_500_data/test_y_values_0.1_noise.npy')
+elif dataset == "Friedman_0.2_Noise":
+    X_train = np.load('friedman_500_data/training_x_values.npy')
+    y_train = np.load('friedman_500_data/training_y_values_0.2_noise.npy')
+    X_test = np.load('friedman_500_data/test_x_values_hypercube.npy')
+    y_test = np.load('friedman_500_data/test_y_values_0.2_noise.npy')
+elif dataset == "Friedman_0.3_Noise":
+    X_train = np.load('friedman_500_data/training_x_values.npy')
+    y_train = np.load('friedman_500_data/training_y_values_0.3_noise.npy')
+    X_test = np.load('friedman_500_data/test_x_values_hypercube.npy')
+    y_test = np.load('friedman_500_data/test_y_values_0.3_noise.npy')
+elif dataset == "Friedman_0.4_Noise":
+    X_train = np.load('friedman_500_data/training_x_values.npy')
+    y_train = np.load('friedman_500_data/training_y_values_0.4_noise.npy')
+    X_test = np.load('friedman_500_data/test_x_values_hypercube.npy')
+    y_test = np.load('friedman_500_data/test_y_values_0.4_noise.npy')
+elif dataset == "Friedman_0.5_Noise":
+    X_train = np.load('friedman_500_data/training_x_values.npy')
+    y_train = np.load('friedman_500_data/training_y_values_0.5_noise.npy')
+    X_test = np.load('friedman_500_data/test_x_values_hypercube.npy')
+    y_test = np.load('friedman_500_data/test_y_values_0.5_noise.npy')
+elif dataset == "Friedman_1.0_Noise":
+    X_train = np.load('friedman_500_data/training_x_values.npy')
+    y_train = np.load('friedman_500_data/training_y_values_1.0_noise.npy')
+    X_test = np.load('friedman_500_data/test_x_values_hypercube.npy')
+    y_test = np.load('friedman_500_data/test_y_values_1.0_noise.npy')
+elif dataset == "Friedman_2.0_Noise":
+    X_train = np.load('friedman_500_data/training_x_values.npy')
+    y_train = np.load('friedman_500_data/training_y_values_2.0_noise.npy')
+    X_test = np.load('friedman_500_data/test_x_values_hypercube.npy')
+    y_test = np.load('friedman_500_data/test_y_values_2.0_noise.npy')
 else:
-    X_train = None
-    y_train = None
+    X_train, y_train, X_test, y_test = None, None, None, None
     print("Invalid dataset provided.")
     quit()
 
-# Run action for real data
-if action == "run":
-    if dataset == "Diffusion" or dataset == "Perovskite":
-        # Get test data residuals and model errors
-        TD = td.TestData()
-        Test_residuals, Test_model_errors_unscaled, Test_model_errors_scaled, a_array, b_array = TD.get_residuals_and_model_errors_looped(
-            dataset, model, X_train, y_train, model_num=trees)
-        print('a_array:')
-        print(a_array)
-        print('b_array:')
-        print(b_array)
-
-        # save data
-        save_realdata(a_array, b_array, Test_residuals, Test_model_errors_unscaled, Test_model_errors_scaled)
-
-        # Make scaled and unscaled test data plots
-        MP = mp.MakePlot()
-        # overlay plots
-        MP.make_rstat_overlay(Test_residuals, Test_model_errors_unscaled, Test_model_errors_scaled,
-                              "{}, {}".format(model, dataset),
-                              save=save_plot,
-                              file_name='{}/rstat.png'.format(path))
-
-        MP.make_rve_overlay(Test_residuals, Test_model_errors_unscaled, Test_model_errors_scaled,
-                            "{}, {}".format(model, dataset),
-                            save=save_plot,
-                            file_name='{}/RvE.png'.format(path))
-
-
+########################## Functions to save data ###########################
 def save_realdata(a, b, residuals, unscaled_model_errors, scaled_model_errors):
     combined = []
     for i in range(0, len(residuals)):
@@ -100,3 +114,145 @@ def save_realdata(a, b, residuals, unscaled_model_errors, scaled_model_errors):
     np.savetxt("{}/calibration_values.csv".format(path), combined_calibration,
                header="cv_iteration, a, b",
                delimiter=",")
+
+
+def save_syntheticdata(a, b, residuals, unscaled_model_errors, scaled_model_errors):
+    combined = []
+    for i in range(0, len(residuals)):
+        curr = np.asarray([residuals[i], unscaled_model_errors[i], scaled_model_errors[i]])
+        combined.append(curr)
+
+    combined = np.asarray(combined)
+
+    calibration = np.asarray([np.asarray([a[0], b[0]])])
+
+    np.savetxt("{}/residuals_and_uncertainty_estimates.csv".format(path), combined,
+               header="residual, uncalibrated_uncertainty_estimate, calibrated_uncertainty_estimate",
+               delimiter=",")
+
+    np.savetxt("{}/calibration_values.csv".format(path), calibration, header="a, b",
+               delimiter=",")
+
+
+###################################### Actions based on user input ###########################
+# Run action for real and synthetic data
+if action == "run":
+    if dataset == "Diffusion" or dataset == "Perovskite":
+        print("Starting run for {} on {} data.".format(model, dataset))
+        # Get test data residuals and model errors
+        TD = td.TestData()
+        Test_residuals, Test_model_errors_unscaled, Test_model_errors_scaled, a_array, b_array = TD.get_residuals_and_model_errors_looped(
+            dataset, model, X_train, y_train, model_num=trees)
+
+        print("Summary:")
+        print("a = %d +/- %d", np.mean(a_array), np.std(a_array))
+        print("b = %d +/- %d", np.mean(a_array), np.std(a_array))
+
+        # save data
+        save_realdata(a_array, b_array, Test_residuals, Test_model_errors_unscaled, Test_model_errors_scaled)
+
+        # Make scaled and unscaled test data plots
+        MP = mp.MakePlot()
+        # overlay plots
+        MP.make_rstat_overlay(Test_residuals, Test_model_errors_unscaled, Test_model_errors_scaled,
+                              "{}, {}".format(model, dataset),
+                              save=save_plot,
+                              file_name='{}/rstat.png'.format(path))
+
+        MP.make_rve_overlay(Test_residuals, Test_model_errors_unscaled, Test_model_errors_scaled,
+                            "{}, {}".format(model, dataset),
+                            save=save_plot,
+                            file_name='{}/RvE.png'.format(path))
+
+    elif dataset == "Friedman":
+        print("Starting run for {} on {} data.".format(model, dataset))
+        # Get CV residuals and model errors
+        CVD = cvd.CVData()
+        CV_residuals, CV_model_errors = CVD.get_residuals_and_model_errors(model, X_train, y_train, model_num=trees)
+
+        # Scale residuals and model errors by data set standard deviation
+        stdev = np.std(y_train)
+        CV_residuals = CV_residuals / stdev
+        CV_model_errors = CV_model_errors / stdev
+
+        # Get correction factors
+        CF = cf.CorrectionFactors(CV_residuals, CV_model_errors)
+        a, b, r_squared = CF.nll()
+        print('Correction Factors:')
+        print('a: ' + str(a))
+        print('b: ' + str(b))
+
+        # Get test data residuals and model errors
+        TD = td.TestData()
+        Test_residuals, Test_model_errors = TD.get_residuals_and_model_errors(model, X_train, y_train, X_test, y_test,
+                                                                              model_num=trees)
+        # Scale by standard deviation
+        Test_residuals = Test_residuals / stdev
+        Test_model_errors = Test_model_errors / stdev
+
+        # Save data from run
+        save_syntheticdata(a, b, Test_residuals, Test_model_errors, Test_model_errors * a + b)
+
+        # Make scaled and unscaled test data plots
+        MP = mp.MakePlot()
+        MP.make_rstat_overlay(Test_residuals, Test_model_errors, Test_model_errors * a + b,
+                              "{}, {}".format(model, dataset), save=save_plot,
+                              file_name='{}/rstat.png'.format(path))
+
+        MP.make_rve_overlay(Test_residuals, Test_model_errors, Test_model_errors * a + b,
+                            "{}, {}".format(model, dataset),
+                            save=save_plot,
+                            file_name='{}/RvE.png'.format(path))
+
+
+# Plot action for real and synthetic data
+if action == "plot":
+    if dataset == "Diffusion" or dataset == "Perovskite":
+        # Load pre-run data
+        unscaled_model_errors = np.load(
+            'data_for_paper_plots/{}/{}/Test/Test_model_errors_unscaled.npy'.format(dataset, model))
+        scaled_model_errors = np.load(
+            'data_for_paper_plots/{}/{}/Test/Test_model_errors_scaled.npy'.format(dataset, model))
+        residuals = np.load('data_for_paper_plots/{}/{}/Test/Test_residuals.npy'.format(dataset, model))
+        a = np.load('data_for_paper_plots/{}/{}/Test/a.npy'.format(dataset, model))
+        b = np.load('data_for_paper_plots/{}/{}/Test/b.npy'.format(dataset, model))
+
+        # save data
+        save_realdata(a, b, residuals, unscaled_model_errors, scaled_model_errors)
+
+        # Make scaled and unscaled test data plots
+        MP = mp.MakePlot()
+        MP.make_rstat_overlay(residuals, unscaled_model_errors, scaled_model_errors, "{}, {}".format(model, dataset),
+                              save=save_plot,
+                              file_name='{}/rstat.png'.format(path))
+
+        MP.make_rve_overlay(residuals, unscaled_model_errors, scaled_model_errors, "{}, {}".format(model, dataset),
+                            save=save_plot,
+                            file_name='{}/RvE.png'.format(path))
+
+    else:
+        if dataset == "Friedman":
+            unscaled_model_errors = np.load(
+                'data_for_paper_plots/Friedman_500/{}/Test/Test_model_errors.npy'.format(model))
+            residuals = np.load('data_for_paper_plots/Friedman_500/{}/Test/Test_residuals.npy'.format(model))
+            a = np.load('data_for_paper_plots/Friedman_500/{}/Test/a.npy'.format(model))
+            b = np.load('data_for_paper_plots/Friedman_500/{}/Test/b.npy'.format(model))
+            scaled_model_errors = unscaled_model_errors * a[0] + b[0]
+        else:
+            a, b, residuals, unscaled_model_errors, scaled_model_errors = None, None, None, None, None
+            print("No valid dataset provided.")
+            quit()
+
+        # Save data
+        save_syntheticdata(a, b, residuals, unscaled_model_errors, scaled_model_errors)
+
+        # make plots
+        MP = mp.MakePlot()
+        MP.make_rstat_overlay(residuals, unscaled_model_errors, scaled_model_errors,
+                              "{}, {}".format(model, dataset), save=save_plot,
+                              file_name='{}/rstat.png'.format(path))
+
+        MP.make_rve_overlay(residuals, unscaled_model_errors, scaled_model_errors,
+                            "{}, {}".format(model, dataset),
+                            save=save_plot,
+                            file_name='{}/RvE.png'.format(path))
