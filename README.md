@@ -16,7 +16,7 @@ usage: <python> main.py <action> <model> <dataset> <optional_save_path>
          - LR
          - GPR
          - GPR_Bayesian
-<datset> is one of the available datasets:
+<dataset> is one of the available datasets:
          - Diffusion
          - Perovskite
          - Friedman
