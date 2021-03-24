@@ -28,7 +28,7 @@ usage: <python> main.py <action> <model> <dataset> <optional_save_path>
          - Friedman_1.0_Noise
          - Friedman_2.0_Noise
 <optional_save_path> is an optional location to save the resulting data and plots.
-         If no path is given here, they will be saved in the current directory.
+         If no path is given here, data and plots will be saved in the current directory.
 ```
 
 Example use:
