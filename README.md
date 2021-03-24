@@ -32,3 +32,13 @@ usage: <python> main.py <action> <model> <dataset> <optional_save_path>
 ```
 
 Example use:
+
+```
+python3 main.py plot GPR Diffusion
+```
+In the example above, r-statistic and RMS residual vs. uncertainty estimate plots are made from the residuals, uncertainty estimates, and calibration factors found for Gaussian process regression on the Diffusion data set. These plots should match the corresponding plots from the paper.
+
+```
+python3 main.py run RF Friedman
+```
+In the example above, 5-fold cross-validation splits are randomly generated for the synthetic dataset used for the paper to obtain residuals, uncertainty estimates, and calibration factors for predictions by a random forest model. These are then used to make r-statistic and RMS residual vs. uncertainty estimate plots. These plots will likely differ slightly from the ones in the paper due to random variation in the cross-validation.
