@@ -2,7 +2,7 @@
 Code to generate plots for research on scaling error bars from machine-learning models.
 
 # Instructions for use:
-To recreate the figures from the paper "Calibrated Bootstrap for Uncertainty Quantification in Regression Models", use the format specified below.  
+To recreate the figures from the paper "Calibrated Bootstrap for Uncertainty Quantification in Regression Models", use the command line format specified below. Code should be run with Python 3.
 
 ```
 usage: <python> main.py <action> <model> <dataset> <optional_save_path>
