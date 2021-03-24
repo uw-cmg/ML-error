@@ -1,8 +1,10 @@
 # ML-Error
-Code to generate plots for research on scaling error bars from machine-learning models.
+Code to generate plots and/or re-run calculations from the paper "Calibrated Bootstrap for Uncertainty Quantification in Regression Models".
 
 # Instructions for use:
-To recreate the figures from the paper "Calibrated Bootstrap for Uncertainty Quantification in Regression Models", use the command line format specified below. Code should be run with Python 3.
+Use the command line format specified below. Code should be run with Python 3. 
+
+Note that the 'plot' command simply replots the figures from the paper using computations that have already been done, while the 'run' command re-runs our cross-validation method with random splits. Accordingly, the 'run' command may take (substantially) longer to finish, and will result in plots that will likely vary slightly from the ones in the paper.
 
 ```
 usage: <python> main.py <action> <model> <dataset> <optional_save_path>
