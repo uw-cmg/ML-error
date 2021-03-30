@@ -379,7 +379,7 @@ class MakePlot:
         fig = plt.figure()
         ax = fig.add_subplot(111)
         ax.set_title('r-statistic distribution -- {}'.format(title))
-        ax.set_xlabel('residuals / uncertainty estimates')
+        ax.set_xlabel(r'residuals / $\hat{\sigma}$')
         ax.set_ylabel('relative counts')
         ax.hist(unscaled_residuals / unscaled_model_errors, bins=30, color='grey', edgecolor='black', density=True, alpha=0.5, label='uncalibrated')
         ax.hist(scaled_residuals / scaled_model_errors, bins=30, color='blue', edgecolor='black', density=True, alpha=0.5, label='calibrated')
@@ -532,7 +532,7 @@ class MakePlot:
         x = np.linspace(lowerbound, upperbound, 100)
         ax.plot(x, x, color='red', label='identity function', alpha=0.5, linestyle='dashed')
         #ax.set_title('Binned RvE Plot -- {}'.format(title))
-        ax.set_xlabel('uncertainty estimates')
+        ax.set_xlabel(r'$\hat{\sigma}$')
         ax.set_ylabel('RMS residuals')
         # unscaled stuff
         # separate well-sampled data (> 30 points) from poorly-sampled data
