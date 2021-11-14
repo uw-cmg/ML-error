@@ -906,3 +906,69 @@ class MakePlot:
                 plt.savefig(file_name, dpi=300)
         plt.close(fig)
         return 0
+
+    def make_qq_overlay(self, residuals, unscaled_model_errors, scaled_model_errors, title, save=False, file_name=None):
+        # Eliminate model errors with value 0, so that the ratios can be calculated
+        zero_indices = []
+        for i in range(0, len(unscaled_model_errors)):
+            if unscaled_model_errors[i] == 0:
+                zero_indices.append(i)
+        unscaled_residuals = np.delete(residuals, zero_indices)
+        unscaled_model_errors = np.delete(unscaled_model_errors, zero_indices)
+        #print("{} values deleted before making r-stat plot because unscaled model errors were zero.".format(len(zero_indices)))
+        scaled_zero_indices = []
+        for i in range(0, len(scaled_model_errors)):
+            if scaled_model_errors[i] == 0:
+                scaled_zero_indices.append(i)
+        scaled_residuals = np.delete(residuals, scaled_zero_indices)
+        scaled_model_errors = np.delete(scaled_model_errors, scaled_zero_indices)
+        #print("{} values deleted before making r-stat plot because scaled model errors were zero.".format(len(zero_indices)))
+        # make data for gaussian plot
+        gaussian_x = np.linspace(-5, 5, 1000)
+        # create plot
+        fig = plt.figure()
+        ax = fig.add_subplot(111)
+        #ax.set_title('r-statistic qq plot -- {}'.format(title))
+        #ax.set_xlabel(r'residuals / $\hat{\sigma}$')
+        #ax.set_ylabel('relative counts')
+        #ax.hist(unscaled_residuals / unscaled_model_errors, bins=30, color='grey', edgecolor='black', density=True, alpha=0.5, label='uncalibrated')
+        #ax.hist(scaled_residuals / scaled_model_errors, bins=30, color='blue', edgecolor='black', density=True, alpha=0.5, label='calibrated')
+        #ax.plot(gaussian_x, stats.norm.pdf(gaussian_x, 0, 1), label='standard normal pdf', color='orange')
+        stats.probplot(unscaled_residuals / unscaled_model_errors, plot=plt, fit=False)
+        stats.probplot(scaled_residuals / scaled_model_errors, plot=plt, fit=False)
+
+        # get rid of regression lines
+        ax.get_lines()[1].remove()
+        ax.get_lines()[2].remove()
+
+        # set color of markers
+        ax.get_lines()[0].set_markerfacecolor('grey')
+        ax.get_lines()[1].set_markerfacecolor('blue')
+        ax.get_lines()[0].set_markeredgecolor('grey')
+        ax.get_lines()[1].set_markeredgecolor('blue')
+        ax.get_lines()[0].set_alpha(0.5)
+        ax.get_lines()[1].set_alpha(0.5)
+        ax.get_lines()[0].set_label('uncalibrated')
+        ax.get_lines()[1].set_label('calibrated')
+
+        # add 45 degree line
+        ax.plot([-5,5], [-5,5], c='red')
+
+        ax.set_title('r-statistic Q-Q plot -- {}'.format(title))
+        ax.legend(loc="upper left")
+        #ax.text(0.05, 0.9, 'mean = %.3f' % (np.mean(residuals / model_errors)), transform=ax.transAxes)
+        #ax.text(0.05, 0.85, 'std = %.3f' % (np.std(residuals / model_errors)), transform=ax.transAxes)
+        if save is False:
+            plt.show()
+        elif save is True:
+            if file_name is None:
+                print("save is set to True, but no file path specified")
+            else:
+                plt.savefig(file_name, dpi=300)
+        plt.close(fig)
+        #print("r-statistic:")
+        #print("uncalibrated mean = %.3f" % (np.mean(unscaled_residuals / unscaled_model_errors)))
+        #print("uncalibrated stdev = %.3f" % (np.std(unscaled_residuals / unscaled_model_errors)))
+        #print("calibrated mean = %.3f" % (np.mean(scaled_residuals / scaled_model_errors)))
+        #print("calibrated stdev = %.3f" % (np.std(scaled_residuals / scaled_model_errors)))
+        return 0
