@@ -256,6 +256,10 @@ if action == "plot":
         print("a = %.3f +/- %.3f" % (np.mean(a), np.std(a)))
         print("b = %.3f +/- %.3f" % (np.mean(b), np.std(b)))
 
+        print("Overall RMSE:")
+        rmse = np.sqrt(np.mean(residuals**2))
+        print(rmse)
+
         # save data
         save_realdata(a, b, residuals, unscaled_model_errors, scaled_model_errors)
 
@@ -268,6 +272,10 @@ if action == "plot":
         MP.make_rve_overlay(residuals, unscaled_model_errors, scaled_model_errors, "{}, {}".format(model, dataset),
                             save=save_plot,
                             file_name='{}/RvE.png'.format(path))
+
+        MP.make_qq_overlay(residuals, unscaled_model_errors, scaled_model_errors,
+                           "{}, {}".format(model, dataset), save=save_plot,
+                           file_name='{}/qq_rstat.png'.format(path))
 
     else:
         if dataset == "Friedman":
@@ -335,6 +343,10 @@ if action == "plot":
         print("a = %.3f" % a[0])
         print("b = %.3f" % b[0])
 
+        print("Overall RMSE:")
+        rmse = np.sqrt(np.mean(residuals ** 2))
+        print(rmse)
+
         # Save data
         save_syntheticdata(a[0], b[0], residuals, unscaled_model_errors, scaled_model_errors)
 
@@ -348,4 +360,8 @@ if action == "plot":
                             "{}, {}".format(model, dataset),
                             save=save_plot,
                             file_name='{}/RvE.png'.format(path))
+
+        MP.make_qq_overlay(residuals, unscaled_model_errors, scaled_model_errors,
+                              "{}, {}".format(model, dataset), save=save_plot,
+                              file_name='{}/qq_rstat.png'.format(path))
 

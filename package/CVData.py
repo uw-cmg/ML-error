@@ -25,6 +25,8 @@ class CVData:
 			return self._get_GPR(X_train, y_train, model_num, random_state)
 		elif model_type == "GPR_Bayesian":
 			return self._get_GPR_bayes(X_train, y_train, random_state)
+		elif model_type == "GPR_Both":
+			return self._get_GPR_both(X_train, y_train, model_num, random_state)
 		else:
 			print("No valid model type was provided in the 'get_residuals_and_model_errors' CVData method.")
 
@@ -112,3 +114,31 @@ class CVData:
 			resid = np.concatenate((resid, res), axis=None)
 
 		return resid, model_errors
+
+	def _get_GPR_both(self, X_values, y_values, model_num, random_state):
+		rkf = RepeatedKFold(n_splits=5, n_repeats=4, random_state=random_state)
+		# GPR
+		model_errors_bayes = np.asarray([])
+		model_errors_bootstrap = np.asarray([])
+		resid = np.asarray([])
+		i = 1
+		for train_index, test_index in rkf.split(X_values):
+			print("Starting cross-validation loop {} of 20".format(i))
+			i = i + 1
+			X_train, X_test = X_values[train_index], X_values[test_index]
+			y_train, y_test = y_values[train_index], y_values[test_index]
+			# predict with single model
+			GPR_bayes = gpr.GPR()
+			GPR_bayes.train_single(X_train, y_train)
+			pred_bayes, errors_bayes = GPR_bayes.predict_single(X_test, retstd=True)
+			# predict with bootstrap ensemble
+			GPR_bootstrap = gpr.GPR()
+			GPR_bootstrap.train(X_train, y_train, model_num)
+			pred_bootstrap, errors_bootstrap = GPR_bootstrap.predict(X_test, True)
+			# save the bayes (single model) residuals, and both sets of model errors
+			res = y_test - pred_bayes
+			model_errors_bayes = np.concatenate((model_errors_bayes, errors_bayes), axis=None)
+			model_errors_bootstrap = np.concatenate((model_errors_bootstrap, errors_bootstrap), axis=None)
+			resid = np.concatenate((resid, res), axis=None)
+
+		return resid, model_errors_bayes, model_errors_bootstrap
