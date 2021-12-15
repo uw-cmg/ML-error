@@ -18,6 +18,7 @@ usage: <python> main.py <action> <model> <dataset> <optional_save_path>
          - LR
          - GPR
          - GPR_Bayesian
+         - GPR_Both
 <dataset> is one of the available datasets:
          - Diffusion
          - Perovskite
@@ -44,3 +45,9 @@ In the example above, r-statistic and RMS residual vs. uncertainty estimate plot
 python3 main.py run RF Friedman
 ```
 In the example above, 5-fold cross-validation splits are randomly generated for the synthetic dataset used for the paper to obtain residuals, uncertainty estimates, and calibration factors for predictions by a random forest model. These are then used to make r-statistic and RMS residual vs. uncertainty estimate plots. These plots will likely differ slightly from the ones in the paper due to random variation in the cross-validation.
+
+## Note on different GPR models
+Note the three different options for running GPR: ```GPR```, ```GPR_Bayesian```, and ```GPR_Both```. Each of these performs a different action. 
+* The ```GPR``` model makes predictions with a bootstrap ensemble of GPR models, with UQ given by the standard deviation of the ensemble predictions.
+* The ```GPR_Bayesian``` model makes predictions with a single GPR model, with standard Bayesian UQ as implemented in sklearn.
+* The ```GPR_Both``` model makes predictions with a single GPR model, but uses two methods of UQ so the user can compare them. The first is the standard Bayesian error bars, as in ```GPR_Bayesian``` above. The second is by fitting a bootstrap ensemble of GPR models and finding the standard deviation of those predictions, as in ```GPR``` above (except that here, the ensemble is not used to make the actual predictions, only for UQ). (See Figure 3 in the paper.)
